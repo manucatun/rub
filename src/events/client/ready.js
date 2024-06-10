@@ -63,7 +63,6 @@ module.exports = (client) => {
           value: `\`\`\`yml\n${client.slashCommands.size} cargados\`\`\``,
           inline: true,
         })
-        .setColor(process.env.COLOR)
         .setTimestamp(),
     ],
   });
