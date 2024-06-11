@@ -15,11 +15,11 @@ module.exports = (client) => {
       }
 
       const data = await setupSchema.findOne({ guildID: guild.id });
-
-      const canal = guild.channels.cache.get(data.levels.channel);
-      if (!data || !data.levels || !canal) {
+      if (!data || !data.levels || !data.levels.channel) {
         return;
       }
+
+      const canal = guild.channels.cache.get(data.levels.channel);
       /* Comprobaciones */
 
       const xp = Math.floor(Math.random() * 30) + 1;
