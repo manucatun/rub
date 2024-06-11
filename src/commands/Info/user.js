@@ -5,7 +5,7 @@ const {
   ActionRowBuilder,
   ButtonBuilder,
 } = require("discord.js");
-const { getAverageColor } = require("fast-average-color-node");
+const { getAverageCOLOR } = require("fast-average-color-node");
 const { profileImage } = require("discord-arts");
 const warningsSchema = require("../../models/warning");
 module.exports = {
@@ -73,7 +73,7 @@ module.exports = {
             }
             /* Comprobaciones */
 
-            const color = await getAverageColor(usuario.avatarURL());
+            const color = await getAverageCOLOR(usuario.avatarURL());
 
             await interaction.reply({
               embeds: [
@@ -86,8 +86,8 @@ module.exports = {
                     }),
                   })
                   .setImage(usuario.avatarURL({ extension: "png", size: 1024 }))
-                  .setColor(color.hex)
-                  .setFooter({ text: `Color HEX: ${color.hex}` }),
+                  .setCOLOR(color.hex)
+                  .setFooter({ text: `COLOR HEX: ${color.hex}` }),
               ],
               components: [
                 new ActionRowBuilder().addComponents([
@@ -130,7 +130,7 @@ module.exports = {
             }
             /* Comprobaciones */
 
-            const color = await getAverageColor(usuario.bannerURL());
+            const color = await getAverageCOLOR(usuario.bannerURL());
 
             await interaction.reply({
               embeds: [
@@ -143,8 +143,8 @@ module.exports = {
                     }),
                   })
                   .setImage(usuario.bannerURL({ extension: "png", size: 512 }))
-                  .setColor(color.hex)
-                  .setFooter({ text: `Color HEX: ${color.hex}` }),
+                  .setCOLOR(color.hex)
+                  .setFooter({ text: `COLOR HEX: ${color.hex}` }),
               ],
               components: [
                 new ActionRowBuilder().addComponents([
@@ -242,7 +242,7 @@ module.exports = {
                         : `El usuario no tiene un banner.`,
                     }
                   )
-                  .setColor(miembro.roles.highest.color || process.env.COLOR),
+                  .setCOLOR(miembro.roles.highest.color || process.env.COLOR),
               ],
             });
           }

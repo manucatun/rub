@@ -53,7 +53,7 @@ module.exports = {
             .setDescription(
               `📅 ¡Obtuviste una recompensa de <:coinIcon:1240873651956482139> **${recompensa.toLocaleString()} monedas**!\nRegresa mañana para conseguirla de nuevo.\n`
             )
-            .setColor(process.env.COLOR)
+            .setCOLOR(process.env.COLOR)
             .setFooter({
               text: `Powered by manucatun`,
               iconURL: `https://static.independent.co.uk/2023/04/10/12/GettyImages-1399738189.jpg?width=1200&height=1200&fit=crop`,

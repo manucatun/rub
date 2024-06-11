@@ -87,7 +87,7 @@ module.exports = (client) => {
               text: `Powered by manucatun`,
               iconURL: `https://static.independent.co.uk/2023/04/10/12/GettyImages-1399738189.jpg?width=1200&height=1200&fit=crop`,
             })
-            .setColor(process.env.COLOR)
+            .setCOLOR(process.env.COLOR)
             .setTimestamp(),
         ],
         components: [
@@ -199,7 +199,7 @@ module.exports = (client) => {
                       text: `Powered by manucatun`,
                       iconURL: `https://static.independent.co.uk/2023/04/10/12/GettyImages-1399738189.jpg?width=1200&height=1200&fit=crop`,
                     })
-                    .setColor("Red")
+                    .setCOLOR("Red")
                     .setTimestamp(),
                 ],
                 components: [
@@ -314,7 +314,7 @@ module.exports = (client) => {
                       text: `Powered by manucatun`,
                       iconURL: `https://static.independent.co.uk/2023/04/10/12/GettyImages-1399738189.jpg?width=1200&height=1200&fit=crop`,
                     })
-                    .setColor("Green")
+                    .setCOLOR("Green")
                     .setTimestamp(),
                 ],
                 components: [
@@ -418,7 +418,7 @@ module.exports = (client) => {
                       text: `Powered by manucatun`,
                       iconURL: `https://static.independent.co.uk/2023/04/10/12/GettyImages-1399738189.jpg?width=1200&height=1200&fit=crop`,
                     })
-                    .setColor("Red")
+                    .setCOLOR("Red")
                     .setTimestamp(),
                 ],
               });
@@ -490,7 +490,7 @@ module.exports = (client) => {
                     text: `Powered by manucatun`,
                     iconURL: `https://static.independent.co.uk/2023/04/10/12/GettyImages-1399738189.jpg?width=1200&height=1200&fit=crop`,
                   })
-                  .setColor("Purple")
+                  .setCOLOR("Purple")
                   .setTimestamp(),
               ],
               files: [doc],

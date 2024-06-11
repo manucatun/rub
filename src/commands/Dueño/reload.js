@@ -65,7 +65,7 @@ module.exports = {
             .setDescription(
               `<:management:1198448111547318282> Se recargaron todos los procesos de \`${seleccionado}\` correctamente.`
             )
-            .setColor(process.env.COLOR),
+            .setCOLOR(process.env.COLOR),
         ],
       });
     } catch (e) {

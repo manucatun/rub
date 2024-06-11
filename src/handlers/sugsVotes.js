@@ -269,7 +269,7 @@ module.exports = (client) => {
                       inline: true,
                     }
                   )
-                  .setColor(process.env.COLOR),
+                  .setCOLOR(process.env.COLOR),
               ],
               ephemeral: true,
             });

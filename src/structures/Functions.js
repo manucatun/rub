@@ -134,7 +134,7 @@ async function paginacion(
     let embed = new EmbedBuilder()
       .setTitle(title.toString())
       .setDescription(desc.join(" "))
-      .setColor(process.env.COLOR);
+      .setCOLOR(process.env.COLOR);
 
     embeds.push(embed);
     /* Crear Embed */

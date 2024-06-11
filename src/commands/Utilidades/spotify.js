@@ -11,7 +11,7 @@ const {
 } = require("discord.js");
 const Canvas = require("@napi-rs/canvas");
 const moment = require("moment");
-const { getAverageColor } = require("fast-average-color-node");
+const { getAverageCOLOR } = require("fast-average-color-node");
 const { Client } = require("genius-lyrics");
 const geniusClient = new Client(
   "47XVh9RXZwamYGOVqeYGX0oLkCR1JuwJW2-ckaS4upkn-deF6nYxoj_c4fJ-6vqO"
@@ -103,7 +103,7 @@ module.exports = {
               text: `Powered by manucatun`,
               iconURL: `https://static.independent.co.uk/2023/04/10/12/GettyImages-1399738189.jpg?width=1200&height=1200&fit=crop`,
             })
-            .setColor(process.env.COLOR)
+            .setCOLOR(process.env.COLOR)
             .setTimestamp(),
         ],
         components: [menu],
@@ -369,7 +369,7 @@ function imgVertical(
   context.globalAlpha = 0.7;
   /* Cuadro de Texto */
 
-  context.shadowColor = "rgba(0, 0, 0, 5)";
+  context.shadowCOLOR = "rgba(0, 0, 0, 5)";
   context.shadowBlur = 20;
 
   /* Nombre */
@@ -385,7 +385,7 @@ function imgVertical(
   context.fillText(presence.state, canvas.width / 2, rectY + 126);
   /* Autor */
 
-  context.shadowColor = "transparent";
+  context.shadowCOLOR = "transparent";
   context.shadowBlur = 0;
 
   /* Progreso */
@@ -470,7 +470,7 @@ function imgVertical(
   context.fill();
   /* Progreso */
 
-  context.shadowColor = "rgba(0, 0, 0, 5)";
+  context.shadowCOLOR = "rgba(0, 0, 0, 5)";
   context.shadowBlur = 20;
 
   /* Duración */
@@ -558,7 +558,7 @@ async function imgLyrics(presence, songImage, botAvatar, spotifyLogo, lyrics) {
   const canvas = Canvas.createCanvas(858, 1713);
   const context = canvas.getContext("2d");
 
-  const color = await getAverageColor(songImage);
+  const color = await getAverageCOLOR(songImage);
 
   /* Fondo e Imagen */
   context.filter = "blur(20px)";
@@ -615,7 +615,7 @@ async function imgLyrics(presence, songImage, botAvatar, spotifyLogo, lyrics) {
   context.globalAlpha = 0.7;
   /* Cuadro de Texto */
 
-  context.shadowColor = "rgba(0, 0, 0, 5)";
+  context.shadowCOLOR = "rgba(0, 0, 0, 5)";
   context.shadowBlur = 20;
 
   /* Nombre */
@@ -631,10 +631,10 @@ async function imgLyrics(presence, songImage, botAvatar, spotifyLogo, lyrics) {
   context.fillText(presence.state, canvas.width / 2, rectY + 126);
   /* Autor */
 
-  context.shadowColor = "transparent";
+  context.shadowCOLOR = "transparent";
   context.shadowBlur = 0;
 
-  context.shadowColor = "rgba(0, 0, 0, 5)";
+  context.shadowCOLOR = "rgba(0, 0, 0, 5)";
   context.shadowBlur = 20;
 
   /* Foto del Spotify logo */
