@@ -17,7 +17,7 @@
     "discord-giveaways": "^6.0.1",
     "discord-html-transcripts": "^3.2.0",
     "discord-xp": "^1.1.16",
-    "discord.js": "^14.14.1",
+    "discord.js": "^14.15.3",
     "dotenv": "^16.3.2",
     "fast-average-color-node": "^2.6.0",
     "genius-lyrics": "^4.4.6",
