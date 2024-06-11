@@ -3,7 +3,7 @@ const webhook = new WebhookClient({ url: process.env.WEBHOOK });
 const { inspect } = require("util");
 
 module.exports = (client) => {
-  const embed = new EmbedBuilder().setCOLOR("Red");
+  const embed = new EmbedBuilder().setColor("Red");
 
   process.removeAllListeners();
 

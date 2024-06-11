@@ -53,7 +53,7 @@ module.exports = {
                     }),
                   })
                   .setImage(guild.bannerURL({ extension: "png", size: 512 }))
-                  .setCOLOR(color.hex)
+                  .setColor(color.hex)
                   .setFooter({ text: `COLOR HEX: ${color.hex}` }),
               ],
               components: [
@@ -100,7 +100,7 @@ module.exports = {
                     }),
                   })
                   .setImage(guild.iconURL({ extension: "png", size: 1024 }))
-                  .setCOLOR(color.hex)
+                  .setColor(color.hex)
                   .setFooter({ text: `COLOR HEX: ${color.hex}` }),
               ],
               components: [
@@ -214,7 +214,7 @@ module.exports = {
                         : `El servidor no tiene un banner.`,
                     }
                   )
-                  .setCOLOR(process.env.COLOR),
+                  .setColor(process.env.COLOR),
               ],
             });
           }

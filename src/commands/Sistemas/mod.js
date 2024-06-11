@@ -229,7 +229,7 @@ module.exports = {
                           value: `${member}`,
                         }
                       )
-                      .setCOLOR("Red")
+                      .setColor("Red")
                       .setFooter({
                         text: `Powered by manucatun`,
                         iconURL: `https://static.independent.co.uk/2023/04/10/12/GettyImages-1399738189.jpg?width=1200&height=1200&fit=crop`,
@@ -274,7 +274,7 @@ module.exports = {
                         text: `Powered by manucatun`,
                         iconURL: `https://static.independent.co.uk/2023/04/10/12/GettyImages-1399738189.jpg?width=1200&height=1200&fit=crop`,
                       })
-                      .setCOLOR("Red")
+                      .setColor("Red")
                       .setTimestamp(),
                   ],
                 });
@@ -408,7 +408,7 @@ module.exports = {
                         text: `Powered by manucatun`,
                         iconURL: `https://static.independent.co.uk/2023/04/10/12/GettyImages-1399738189.jpg?width=1200&height=1200&fit=crop`,
                       })
-                      .setCOLOR("Orange")
+                      .setColor("Orange")
                       .setTimestamp(),
                   ],
                 })
@@ -449,7 +449,7 @@ module.exports = {
                         text: `Powered by manucatun`,
                         iconURL: `https://static.independent.co.uk/2023/04/10/12/GettyImages-1399738189.jpg?width=1200&height=1200&fit=crop`,
                       })
-                      .setCOLOR("Orange")
+                      .setColor("Orange")
                       .setTimestamp(),
                   ],
                 });
@@ -529,7 +529,7 @@ module.exports = {
                       text: `Powered by manucatun`,
                       iconURL: `https://static.independent.co.uk/2023/04/10/12/GettyImages-1399738189.jpg?width=1200&height=1200&fit=crop`,
                     })
-                    .setCOLOR("Red")
+                    .setColor("Red")
                     .setTimestamp(),
                 ],
               });
@@ -635,7 +635,7 @@ module.exports = {
                             text: `Powered by manucatun`,
                             iconURL: `https://static.independent.co.uk/2023/04/10/12/GettyImages-1399738189.jpg?width=1200&height=1200&fit=crop`,
                           })
-                          .setCOLOR("Purple")
+                          .setColor("Purple")
                           .setTimestamp(),
                       ],
                     })
@@ -685,7 +685,7 @@ module.exports = {
                           text: `Powered by manucatun`,
                           iconURL: `https://static.independent.co.uk/2023/04/10/12/GettyImages-1399738189.jpg?width=1200&height=1200&fit=crop`,
                         })
-                        .setCOLOR("Purple")
+                        .setColor("Purple")
                         .setTimestamp(),
                     ],
                   });
@@ -788,7 +788,7 @@ module.exports = {
                           text: `Powered by manucatun`,
                           iconURL: `https://static.independent.co.uk/2023/04/10/12/GettyImages-1399738189.jpg?width=1200&height=1200&fit=crop`,
                         })
-                        .setCOLOR("Green")
+                        .setColor("Green")
                         .setTimestamp(),
                     ],
                   });
@@ -866,7 +866,7 @@ module.exports = {
                       text: `Powered by manucatun`,
                       iconURL: `https://static.independent.co.uk/2023/04/10/12/GettyImages-1399738189.jpg?width=1200&height=1200&fit=crop`,
                     })
-                    .setCOLOR("Green")
+                    .setColor("Green")
                     .setTimestamp(),
                 ],
               });
@@ -940,7 +940,7 @@ module.exports = {
                           text: `Powered by manucatun`,
                           iconURL: `https://static.independent.co.uk/2023/04/10/12/GettyImages-1399738189.jpg?width=1200&height=1200&fit=crop`,
                         })
-                        .setCOLOR("Green")
+                        .setColor("Green")
                         .setTimestamp(),
                     ],
                   })
@@ -971,7 +971,7 @@ module.exports = {
                         text: `Powered by manucatun`,
                         iconURL: `https://static.independent.co.uk/2023/04/10/12/GettyImages-1399738189.jpg?width=1200&height=1200&fit=crop`,
                       })
-                      .setCOLOR("Green")
+                      .setColor("Green")
                       .setTimestamp(),
                   ],
                 });
@@ -1066,7 +1066,7 @@ module.exports = {
                         text: `Powered by manucatun`,
                         iconURL: `https://static.independent.co.uk/2023/04/10/12/GettyImages-1399738189.jpg?width=1200&height=1200&fit=crop`,
                       })
-                      .setCOLOR("Green")
+                      .setColor("Green")
                       .setTimestamp(),
                   ],
                 })
@@ -1100,7 +1100,7 @@ module.exports = {
                       text: `Powered by manucatun`,
                       iconURL: `https://static.independent.co.uk/2023/04/10/12/GettyImages-1399738189.jpg?width=1200&height=1200&fit=crop`,
                     })
-                    .setCOLOR("Green")
+                    .setColor("Green")
                     .setTimestamp(),
                 ],
               });
@@ -1198,7 +1198,7 @@ module.exports = {
                         text: `Powered by manucatun`,
                         iconURL: `https://static.independent.co.uk/2023/04/10/12/GettyImages-1399738189.jpg?width=1200&height=1200&fit=crop`,
                       })
-                      .setCOLOR("Yellow")
+                      .setColor("Yellow")
                       .setTimestamp(),
                   ],
                 })
@@ -1236,7 +1236,7 @@ module.exports = {
                       text: `Powered by manucatun`,
                       iconURL: `https://static.independent.co.uk/2023/04/10/12/GettyImages-1399738189.jpg?width=1200&height=1200&fit=crop`,
                     })
-                    .setCOLOR("Yellow")
+                    .setColor("Yellow")
                     .setTimestamp(),
                 ],
               });

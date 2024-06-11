@@ -137,7 +137,7 @@ module.exports = {
                       ].join("\n"),
                     }
                   )
-                  .setCOLOR(process.env.COLOR),
+                  .setColor(process.env.COLOR),
               ],
             });
           }
@@ -165,7 +165,7 @@ module.exports = {
                       `<:guidelines:1198447843317403728> • **Servidor:** [Rub Development](https://discord.com/invite/S7VbXG8eK8)`,
                     ].join("\n"),
                   })
-                  .setCOLOR("LightGrey"),
+                  .setColor(process.env.COLOR),
               ],
               content: `> <:info:1198447934568669274> Servidor de Soporte: https://discord.com/invite/S7VbXG8eK8`,
             });

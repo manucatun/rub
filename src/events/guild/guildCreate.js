@@ -15,7 +15,7 @@ module.exports = async (client, guild) => {
       embeds: [
         new EmbedBuilder()
           .setTitle("¡Nuevo Servidor!")
-          .setCOLOR(process.env.COLOR)
+          .setColor(process.env.COLOR)
           .setThumbnail(guild.iconURL({ extension: "png", size: 1024 }))
           .setTimestamp()
           .addFields([
@@ -57,7 +57,7 @@ module.exports = async (client, guild) => {
             `¡Gracias por apoyar a nuestro proyecto!\nSi necesitas ayuda o tienes alguna pregunta sobre el bot, no dudes en unirte a nuestro servidor de soporte.\n\n¡Esperamos que disfrutes de todas las funciones que el bot tiene para ofrecer en tu servidor!`
           )
           .addFields({ name: `Importante`, value: `Asegúrate de colocar el rol de __${client.user.username}__ en la posición más alta del servidor para garantizar un funcionamiento sin problemas. Evita posibles complicaciones con el bot o sus comandos siguiendo esta recomendación.` })
-          .setCOLOR(process.env.COLOR),
+          .setColor(process.env.COLOR),
       ],
       components: [
         new ActionRowBuilder().addComponents(
