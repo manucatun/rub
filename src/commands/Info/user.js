@@ -5,7 +5,7 @@ const {
   ActionRowBuilder,
   ButtonBuilder,
 } = require("discord.js");
-const { getAverageCOLOR } = require("fast-average-color-node");
+const { getAverageColor } = require("fast-average-color-node");
 const { profileImage } = require("discord-arts");
 const warningsSchema = require("../../models/warning");
 module.exports = {
@@ -73,7 +73,7 @@ module.exports = {
             }
             /* Comprobaciones */
 
-            const color = await getAverageCOLOR(usuario.avatarURL());
+            const color = await getAverageColor(usuario.avatarURL());
 
             await interaction.reply({
               embeds: [
@@ -87,7 +87,7 @@ module.exports = {
                   })
                   .setImage(usuario.avatarURL({ extension: "png", size: 1024 }))
                   .setColor(color.hex)
-                  .setFooter({ text: `COLOR HEX: ${color.hex}` }),
+                  .setFooter({ text: `Color HEX: ${color.hex}` }),
               ],
               components: [
                 new ActionRowBuilder().addComponents([
@@ -130,7 +130,7 @@ module.exports = {
             }
             /* Comprobaciones */
 
-            const color = await getAverageCOLOR(usuario.bannerURL());
+            const color = await getAverageColor(usuario.bannerURL());
 
             await interaction.reply({
               embeds: [
@@ -144,7 +144,7 @@ module.exports = {
                   })
                   .setImage(usuario.bannerURL({ extension: "png", size: 512 }))
                   .setColor(color.hex)
-                  .setFooter({ text: `COLOR HEX: ${color.hex}` }),
+                  .setFooter({ text: `Color HEX: ${color.hex}` }),
               ],
               components: [
                 new ActionRowBuilder().addComponents([

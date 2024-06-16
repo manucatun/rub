@@ -70,8 +70,8 @@ module.exports = async (client) => {
     client.giveawaysManager = new sorteosDB(client, {
       default: {
         botsCanWin: false,
-        embedCOLOR: process.env.COLOR,
-        embedCOLOREnd: "Green",
+        embedColor: process.env.COLOR,
+        embedColorEnd: "Green",
         reaction: "1198447473346236506",
       },
     });

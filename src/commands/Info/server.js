@@ -6,7 +6,7 @@ const {
   ButtonBuilder,
   ChannelType,
 } = require("discord.js");
-const { getAverageCOLOR } = require("fast-average-color-node");
+const { getAverageColor } = require("fast-average-color-node");
 module.exports = {
   CMD: new SlashCommandBuilder()
     .setDescription("🏡 Información principal del servidor")
@@ -40,7 +40,7 @@ module.exports = {
             }
             /* Comprobaciones */
 
-            const color = await getAverageCOLOR(guild.bannerURL());
+            const color = await getAverageColor(guild.bannerURL());
 
             await interaction.reply({
               embeds: [
@@ -54,7 +54,7 @@ module.exports = {
                   })
                   .setImage(guild.bannerURL({ extension: "png", size: 512 }))
                   .setColor(color.hex)
-                  .setFooter({ text: `COLOR HEX: ${color.hex}` }),
+                  .setFooter({ text: `Color HEX: ${color.hex}` }),
               ],
               components: [
                 new ActionRowBuilder().addComponents([
@@ -87,7 +87,7 @@ module.exports = {
             }
             /* Comprobaciones */
 
-            const color = await getAverageCOLOR(guild.iconURL());
+            const color = await getAverageColor(guild.iconURL());
 
             await interaction.reply({
               embeds: [
@@ -101,7 +101,7 @@ module.exports = {
                   })
                   .setImage(guild.iconURL({ extension: "png", size: 1024 }))
                   .setColor(color.hex)
-                  .setFooter({ text: `COLOR HEX: ${color.hex}` }),
+                  .setFooter({ text: `Color HEX: ${color.hex}` }),
               ],
               components: [
                 new ActionRowBuilder().addComponents([
