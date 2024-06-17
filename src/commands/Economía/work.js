@@ -23,7 +23,17 @@ module.exports = {
 
       const trabajos = [
         "¡Jornada como conductor de tren completada con éxito! Tu habilidad para mantener la puntualidad y la seguridad en las vías ha sido reconocida con un generoso aumento salarial.",
-      ];
+        "¡Turno como enfermera finalizado con excelencia! Tu dedicación y capacidad para brindar cuidados de calidad han sido recompensadas con una merecida promoción.",
+        "¡Proyecto de arquitectura terminado con éxito! Tu visión creativa y atención al detalle han sido reconocidas con un aumento significativo en tu salario.",
+        "¡Semana como chef completada con maestría! Tu talento culinario y pasión en la cocina han sido celebrados con una oferta para liderar un nuevo restaurante.",
+        "¡Día de trabajo como desarrollador de software finalizado con logros! Tu habilidad para resolver problemas y crear soluciones innovadoras ha sido recompensada con una bonificación considerable.",
+        "¡Mes de trabajo como gerente de ventas concluido con éxito! Tu capacidad para superar metas y liderar tu equipo ha sido reconocida con un ascenso y un aumento salarial.",
+        "¡Jornada como maestra finalizada con brillantez! Tu compromiso con la educación y el bienestar de tus alumnos ha sido valorado con una mejora en tus condiciones laborales.",
+        "¡Día de trabajo como bombero completado con valentía! Tu coraje y rápida respuesta en situaciones de emergencia han sido recompensados con una medalla al mérito y un incremento salarial.",
+        "¡Semana como diseñador gráfico concluida con creatividad! Tu habilidad para transformar ideas en arte ha sido reconocida con un proyecto destacado y una bonificación especial.",
+        "¡Turno como policía finalizado con honor! Tu dedicación y servicio a la comunidad han sido celebrados con una condecoración y un aumento salarial.",
+        "¡Jornada como ingeniero finalizada con éxito! Tu habilidad para solucionar problemas complejos y mejorar procesos ha sido recompensada con una promoción y un incremento en tu salario."
+    ];
       let trabajo = trabajos[Math.floor(Math.random() * trabajos.length)];
 
       if (tiempoMs - (Date.now() - data.work) > 0) {
