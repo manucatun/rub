@@ -1,12 +1,13 @@
 {
-  "name": "rubiuhxd",
+  "name": "rub",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "build": "echo 'No build step required' "
   },
-  "author": "",
+  "author": "manu.ds3",
   "license": "ISC",
   "dependencies": {
     "@napi-rs/canvas": "^0.1.51",
