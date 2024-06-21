@@ -5,7 +5,6 @@
   "main": "src/index.js",
   "scripts": {
     "build": "echo 'No build step required' ",
-    "start": "node src/index.js"
   },
   "author": "manu.ds3",
   "license": "ISC",
