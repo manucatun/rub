@@ -5,12 +5,14 @@ const Bot = require("./structures/Client");
 new Bot();
 
 /* SERVER */
-var http = require("http");
+const express = require('express');
+const serverless = require('serverless-http');
 
-http
-  .createServer(function (req, res) {
-    res.write("Bot Conectado Correctamente");
-    res.end();
-  })
-  .listen(3001);
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('Hello, world!');
+});
+
+module.exports.handler = serverless(app);
 /* SERVER */
