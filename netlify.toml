@@ -1,10 +1,8 @@
 [build]
-  command = "npm run build"
-  publish = "dist"
+  command = "npm install && npm run build"
+  publish = "."
+  functions = "src"
 
 [dev]
   command = "npm start"
   framework = "#custom"
-
-[functions]
-  directory = "src"
