@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "build": "echo 'No build step required' ",
+    "build": "echo 'No build step required' "
   },
   "author": "manu.ds3",
   "license": "ISC",
