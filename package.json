@@ -4,7 +4,6 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "build": "echo 'No build step required' ",
     "start": "node src/index.js"
   },
   "author": "manu.ds3",
@@ -29,6 +28,7 @@
     "mongoose": "^8.1.0",
     "os": "^0.1.2",
     "serverless-http": "^3.2.0",
-    "sharp": "^0.33.2"
+    "sharp": "^0.33.2",
+    "vercel": "^34.2.7"
   }
 }
