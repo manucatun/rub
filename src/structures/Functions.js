@@ -183,7 +183,7 @@ async function paginacion(
       i?.user &&
       i?.user.id === interaction.user.id &&
       i?.message.author.id === client.user.id,
-    time: 180e3,
+    time: 30e3,
   });
 
   collector.on("collect", async (button) => {
@@ -291,8 +291,13 @@ async function paginacion(
     }
   });
 
-  collector.on("end", () => {
-    embedPag.components[0].components.map((b) => (b.disabled = true));
+  collector.on("end", async () => {
+    await embedPag
+      .edit({
+        content: `> <:time:1198844708655485048> El temporizador de la interacción ha expirado.`,
+        components: [],
+      })
+      .catch(() => {});
   });
   /* Colector */
 }
