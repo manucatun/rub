@@ -252,8 +252,6 @@ module.exports = {
           {
             const usuario = options.getUser("usuario") || user;
 
-            await interaction.deferReply();
-
             const buffer = await profileImage(usuario.id, {
               squareAvatar: true,
               removeAvatarFrame: true,
@@ -262,7 +260,7 @@ module.exports = {
               ...options,
             });
 
-            await interaction.editReply({
+            await interaction.reply({
               files: [new AttachmentBuilder(buffer)],
             });
           }

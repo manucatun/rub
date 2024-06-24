@@ -10,10 +10,11 @@
   "license": "ISC",
   "dependencies": {
     "@napi-rs/canvas": "^0.1.51",
+    "canvafy": "^7.1.0",
     "canvas": "^2.11.2",
     "colors": "^1.4.0",
     "crypto": "^1.0.1",
-    "discord-arts": "^0.5.8",
+    "discord-arts": "^0.6.1",
     "discord-giveaways": "^6.0.1",
     "discord-html-transcripts": "^3.2.0",
     "discord-xp": "^1.1.16",
@@ -29,6 +30,7 @@
     "os": "^0.1.2",
     "serverless-http": "^3.2.0",
     "sharp": "^0.33.2",
+    "spotify-web-api-node": "^5.0.2",
     "vercel": "^34.2.7"
   }
 }
