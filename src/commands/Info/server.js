@@ -214,7 +214,7 @@ module.exports = {
                         : `El servidor no tiene un banner.`,
                     }
                   )
-                  .setColor(`#${process.env.COLOR}`),
+                  .setColor(process.env.COLOR),
               ],
             });
           }
