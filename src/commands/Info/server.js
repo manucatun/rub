@@ -134,7 +134,7 @@ module.exports = {
                 type.includes(channel.type)
               ).size;
 
-            console.log(process.env.OWNERS);
+            console.log(process.env.COLOR);
             
             await interaction.reply({
               embeds: [
