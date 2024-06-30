@@ -80,7 +80,7 @@ module.exports = {
                 inline: true,
               }
             )
-            .setColor(process.env.COLOR)
+            /* .setColor(process.env.COLOR) */
             .setFooter({
               text: `Powered by manucatun`,
               iconURL: `https://static.independent.co.uk/2023/04/10/12/GettyImages-1399738189.jpg?width=1200&height=1200&fit=crop`,

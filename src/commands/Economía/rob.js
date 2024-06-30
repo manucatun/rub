@@ -96,7 +96,7 @@ module.exports = {
               .setDescription(
                 `💸 ¡El robo fue un éxito, obtuviste una recompensa de <:coinIcon:1240873651956482139> **${recompensa.toLocaleString()} monedas**!\n`
               )
-              .setColor(process.env.COLOR)
+              /* .setColor(process.env.COLOR) */
               .setFooter({
                 text: `Powered by manucatun`,
                 iconURL: `https://static.independent.co.uk/2023/04/10/12/GettyImages-1399738189.jpg?width=1200&height=1200&fit=crop`,
