@@ -1,4 +1,8 @@
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const {
+  SlashCommandBuilder,
+  EmbedBuilder,
+  embedLength,
+} = require("discord.js");
 const ecoSchema = require("../../models/economy");
 module.exports = {
   CMD: new SlashCommandBuilder()
@@ -30,57 +34,77 @@ module.exports = {
       }
 
       /* Contadores */
-      const timeWork = data.work
+      let timeWork = data.work
         ? Math.round(
             (Date.now() + (1 * 45 * 60 * 1000 - (Date.now() - data.work))) /
               1000
           )
-        : Math.round(Date.now() / 1000);
+        : 0;
 
-      const timeDaily = data.daily
+      timeWork =
+        timeWork >= Math.floor(Date.now() / 1000)
+          ? `<t:${timeWork}:R> • <t:${timeWork}>`
+          : "Ya disponible";
+
+      let timeDaily = data.daily
         ? Math.round(
             (Date.now() + (24 * 60 * 60 * 1000 - (Date.now() - data.daily))) /
               1000
           )
         : Math.round(Date.now() / 1000);
 
-      const timeCrime = data.crime
+      timeDaily =
+        timeDaily >= Math.floor(Date.now() / 1000)
+          ? `<t:${timeDaily}:R> • <t:${timeDaily}>`
+          : "Ya disponible";
+
+      let timeCrime = data.crime
         ? Math.round(
             (Date.now() + (1 * 30 * 60 * 1000 - (Date.now() - data.crime))) /
               1000
           )
         : Math.round(Date.now() / 1000);
 
-      const timeRob = data.rob
+      timeCrime =
+        timeCrime >= Math.floor(Date.now() / 1000)
+          ? `<t:${timeCrime}:R> • <t:${timeCrime}>`
+          : "Ya disponible";
+
+      let timeRob = data.rob
         ? Math.round(
             (Date.now() + (1 * 30 * 60 * 1000 - (Date.now() - data.rob))) / 1000
           )
         : Math.round(Date.now() / 1000);
+
+      timeRob =
+        timeRob >= Math.floor(Date.now() / 1000)
+          ? `<t:${timeRob}:R> • <t:${timeRob}>`
+          : "Ya disponible";
       /* Contadores */
 
       await interaction.reply({
         embeds: [
           new EmbedBuilder()
             .setAuthor({
-              name: `Cooldown de ${miembro.displayName}`,
+              name: `Cooldowns de ${miembro.displayName}`,
               iconURL: usuario.avatarURL({ extension: "png", size: 1024 }),
             })
             .addFields(
               {
                 name: `🚜 Work`,
-                value: `<:time:1198844708655485048> <t:${timeWork}:R> • <t:${timeWork}>\n`,
+                value: `<:time:1198844708655485048> ${timeWork}\n`,
               },
               {
                 name: `📅 Daily`,
-                value: `<:time:1198844708655485048> <t:${timeDaily}:R> • <t:${timeDaily}>\n`,
+                value: `<:time:1198844708655485048> ${timeDaily}\n`,
               },
               {
                 name: `🔫 Crime`,
-                value: `<:time:1198844708655485048> <t:${timeCrime}:R> • <t:${timeCrime}>\n`,
+                value: `<:time:1198844708655485048> ${timeCrime}\n`,
               },
               {
                 name: `😈 Rob`,
-                value: `<:time:1198844708655485048> <t:${timeRob}:R> • <t:${timeRob}>\n`,
+                value: `<:time:1198844708655485048> ${timeRob}\n`,
               }
             )
             /* .setColor(process.env.COLOR) */
