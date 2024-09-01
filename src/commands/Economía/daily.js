@@ -27,7 +27,7 @@ module.exports = {
         );
 
         return await interaction.reply({
-          content: `> <:time:1198844708655485048> **Podrás volver a reclamar tu recompensa diaria <t:${tiempoRes}:R>.**`,
+          content: `> <:time:1279138439417303161> **Podrás volver a reclamar tu recompensa diaria <t:${tiempoRes}:R>.**`,
           ephemeral: true,
         });
       }
@@ -51,7 +51,7 @@ module.exports = {
               iconURL: user.avatarURL({ extension: "png", size: 1024 }),
             })
             .setDescription(
-              `📅 ¡Obtuviste una recompensa de <:coinIcon:1240873651956482139> **${recompensa.toLocaleString()} monedas**!\nRegresa mañana para conseguirla de nuevo.\n`
+              `📅 ¡Obtuviste una recompensa de <:coin:1279135394918694922> **${recompensa.toLocaleString()} monedas**!\nRegresa mañana para conseguirla de nuevo.\n`
             )
             /* .setColor(process.env.COLOR) */
             .setFooter({
@@ -63,7 +63,7 @@ module.exports = {
     } catch (e) {
       console.log(e);
       interaction.reply({
-        content: `> <:error:1198447011448508466> **¡Ocurrió un error al intentar ejecutar el comando!**`,
+        content: `> <:error:1279142677308248238> **¡Ocurrió un error al intentar ejecutar el comando!**`,
         ephemeral: true,
       });
     }

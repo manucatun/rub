@@ -72,14 +72,14 @@ module.exports = {
             /* Comprobaciones */
             if (!ganadores || ganadores < 0 || ganadores % 1 != 0) {
               return interaction.reply({
-                content: `> <:error:1198447011448508466> **La cantidad de ganadores no es válida.**`,
+                content: `> <:warning:1279144320062066748> **La cantidad de ganadores no es válida.**`,
                 ephemeral: true,
               });
             }
 
             if (!duraciónMs || duraciónMs < 0 || duraciónMs % 1 != 0) {
               return interaction.reply({
-                content: `> <:error:1198447011448508466> **La duración del sorteo no es válida.**`,
+                content: `> <:warning:1279144320062066748> **La duración del sorteo no es válida.**`,
                 ephemeral: true,
               });
             }
@@ -93,13 +93,13 @@ module.exports = {
                 hostedBy: user,
                 messages: {
                   giveaway:
-                    "<:event:1198447473346236506> **NUEVO SORTEO** <:event:1198447473346236506>",
+                    "<:event:1279143324934209587> **NUEVO SORTEO** <:event:1279143324934209587>",
                   giveawayEnded:
-                    "<:event:1198447473346236506> **SORTEO FINALIZADO** <:event:1198447473346236506>",
+                    "<:event:1279143324934209587> **SORTEO FINALIZADO** <:event:1279143324934209587>",
                   inviteToParticipate:
-                    "**¡Reacciona con <:event:1198447473346236506> para participar!**",
+                    "**¡Reacciona con <:event:1279143324934209587> para participar!**",
                   winMessage:
-                    "> <:event:1198447473346236506> ¡Felicidades {winners}! Por ganar **{this.prize}**.",
+                    "> <:event:1279143324934209587> ¡Felicidades {winners}! Por ganar **{this.prize}**.",
                   winners: "**Ganador(es):**",
                   hostedBy: "**Iniciado por:** {this.hostedBy}",
                   endedAt: "Finalizado el:",
@@ -110,7 +110,7 @@ module.exports = {
               })
               .then(() => {
                 return interaction.reply({
-                  content: `> <:new:1198448546207248606> **El sorteo se creó correctamente en ${canal}.**`,
+                  content: `> <:newmember:1279138879349456916> **El sorteo se creó correctamente en ${canal}.**`,
                   ephemeral: true,
                 });
               });
@@ -122,7 +122,7 @@ module.exports = {
             const id = options.getString("id");
             if (!id || id < 0 || id % 1 != 0) {
               return interaction.reply({
-                content: `> <:error:1198447011448508466> **La Id no es válida.**`,
+                content: `> <:warning:1279144320062066748> **La Id no es válida.**`,
                 ephemeral: true,
               });
             }
@@ -131,20 +131,20 @@ module.exports = {
               .reroll(id, {
                 messages: {
                   congrat:
-                    "> <:event:1198447473346236506> ¡Nuevo(s) ganador(es)! Felicidades {winners}, por ganar **{this.prize}**.",
+                    "> <:event:1279143324934209587> ¡Nuevo(s) ganador(es)! Felicidades {winners}, por ganar **{this.prize}**.",
                   error:
-                    "> <:error:1198447011448508466> **No se ha encontrado a un ganador válido.**",
+                    "> <:warning:1279144320062066748> **No se ha encontrado a un ganador válido.**",
                 },
               })
               .then(() => {
                 interaction.reply({
-                  content: `> <:event:1198447473346236506> **Eligiendo a un nuevo ganador...**`,
+                  content: `> <:event:1279143324934209587> **Eligiendo a un nuevo ganador...**`,
                   ephemeral: true,
                 });
               })
               .catch(() => {
                 interaction.reply({
-                  content: `> <:error:1198447011448508466> **No se ha podido elegir a un nuevo ganador.**`,
+                  content: `> <:warning:1279144320062066748> **No se ha podido elegir a un nuevo ganador.**`,
                   ephemeral: true,
                 });
               });
@@ -156,7 +156,7 @@ module.exports = {
             const id = options.getString("id");
             if (!id || id < 0 || id % 1 != 0) {
               return interaction.reply({
-                content: `> <:error:1198447011448508466> **La Id no es válida.**`,
+                content: `> <:warning:1279144320062066748> **La Id no es válida.**`,
                 ephemeral: true,
               });
             }
@@ -165,19 +165,19 @@ module.exports = {
               .end(id, {
                 messages: {
                   congrat:
-                    "> <:event:1198447473346236506> ¡Felicidades {winners}! Por ganar **{this.price}**",
+                    "> <:event:1279143324934209587> ¡Felicidades {winners}! Por ganar **{this.price}**",
                   error: "**No se ha encontrado a un ganador válido.**",
                 },
               })
               .then(() => {
                 interaction.reply({
-                  content: `> <:event:1198447473346236506> **Eligiendo a un ganador...**`,
+                  content: `> <:event:1279143324934209587> **Eligiendo a un ganador...**`,
                   ephemeral: true,
                 });
               })
               .catch(() => {
                 interaction.reply({
-                  content: `> <:error:1198447011448508466> **No se ha podido elegir a un ganador.**`,
+                  content: `> <:warning:1279144320062066748> **No se ha podido elegir a un ganador.**`,
                   ephemeral: true,
                 });
               });
@@ -187,7 +187,7 @@ module.exports = {
     } catch (e) {
       console.log(e);
       interaction.reply({
-        content: `> <:warning:1198447554497618010> **¡Ocurrió un error al intentar ejecutar el comando!**`,
+        content: `> <:error:1279142677308248238> **¡Ocurrió un error al intentar ejecutar el comando!**`,
         ephemeral: true,
       });
     }

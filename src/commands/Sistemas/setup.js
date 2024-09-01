@@ -95,7 +95,7 @@ module.exports = {
               const msg = await canal.send({
                 embeds: [
                   new EmbedBuilder()
-                    .setTitle(`<:ticket:1201715618374488094> Ticket de Soporte`)
+                    .setTitle(`<:ticket:1279136231908966472> Ticket de Soporte`)
                     .setDescription(
                       `\`\`\`yml\n${mensaje.substring(0, 2048)}\`\`\``
                     )
@@ -109,7 +109,7 @@ module.exports = {
                 components: [
                   new ActionRowBuilder().addComponents(
                     new ButtonBuilder()
-                      .setEmoji("1201715618374488094")
+                      .setEmoji("1279136231908966472")
                       .setCustomId("crearTicket")
                       .setStyle("Success")
                   ),
@@ -141,7 +141,7 @@ module.exports = {
                       iconURL: user.avatarURL({ extension: "png", size: 1024 }),
                     })
                     .setTitle(
-                      `<:management:1198448111547318282> Sistema de Tickets`
+                      `<:management:1279139587448504460> Sistema de Tickets`
                     )
                     .setDescription(`> ¡Sistema de Tickets activado!`)
                     .addFields(
@@ -174,7 +174,7 @@ module.exports = {
                 embeds: [
                   new EmbedBuilder()
                     .setTitle(
-                      `<:noti:1198447092155297802> Canal de Sugerencias`
+                      `<:notification:1279143649300451419> Canal de Sugerencias`
                     )
                     .setDescription(
                       `Envía tus sugerencias a este canal con el comando </suggest:1220941023597953064>`
@@ -210,7 +210,7 @@ module.exports = {
                       iconURL: user.avatarURL({ extension: "png", size: 1024 }),
                     })
                     .setTitle(
-                      `<:management:1198448111547318282> Sistema de Sugerencias`
+                      `<:management:1279139587448504460> Sistema de Sugerencias`
                     )
                     .setDescription(`> ¡Sistema de Sugerencias activado!`)
                     .addFields({ name: `Canal`, value: `${canal}` })
@@ -240,7 +240,7 @@ module.exports = {
                 embeds: [
                   new EmbedBuilder()
                     .setTitle(
-                      `<:noti:1198447092155297802> Canal de Confesiones`
+                      `<:notification:1279143649300451419> Canal de Confesiones`
                     )
                     .setDescription(
                       `Envía tus confesiones a este canal con el comando </confess:>`
@@ -276,7 +276,7 @@ module.exports = {
                       iconURL: user.avatarURL({ extension: "png", size: 1024 }),
                     })
                     .setTitle(
-                      `<:management:1198448111547318282> Sistema de Confesiones`
+                      `<:management:1279139587448504460> Sistema de Confesiones`
                     )
                     .setDescription(`> ¡Sistema de Confesiones activado!`)
                     .addFields({ name: `Canal`, value: `${canal}` })
@@ -302,7 +302,7 @@ module.exports = {
             const canal = options.getChannel("canal") || channel;
             const mensaje =
               options.getString("mensaje") ||
-              "🏆 ¡{usuario} has subido al **nivel {nivel}**! Conseguiste una recompensa de **<:coinIcon:1240873651956482139> {recompensa} monedas**";
+              "🏆 ¡{usuario} has subido al **nivel {nivel}**! Conseguiste una recompensa de **<:coin:1279135394918694922> {recompensa} monedas**";
             const recompensa = options.getNumber("ganancia") || 10;
 
             try {
@@ -332,7 +332,7 @@ module.exports = {
                       iconURL: user.avatarURL({ extension: "png", size: 1024 }),
                     })
                     .setTitle(
-                      `<:management:1198448111547318282> Sistema de Niveles`
+                      `<:management:1279139587448504460> Sistema de Niveles`
                     )
                     .setDescription(`> ¡Sistema de Niveles activado!`)
                     .addFields(
@@ -364,7 +364,7 @@ module.exports = {
       }
     } catch (e) {
       await interaction.reply({
-        content: `> <:warning:1198447554497618010>** ¡Ocurrió un error al intentar ejecutar el comando!**`,
+        content: `> <:error:1279142677308248238> **¡Ocurrió un error al intentar ejecutar el comando!**`,
         ephemeral: true,
       });
       console.log(e);

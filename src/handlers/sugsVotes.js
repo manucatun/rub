@@ -36,13 +36,13 @@ module.exports = (client) => {
               )
             )
               return interaction.reply({
-                content: `> <:no:1198446838819328050> **No tienes permisos para utilizar este botón.**`,
+                content: `> <:cross:1279140540901888060> **No tienes permisos para utilizar este botón.**`,
                 ephemeral: true,
               });
 
             if (msgData.status === "approved")
               return interaction.reply({
-                content: `> <:management:1198448111547318282> **Esta sugerencia ya está aprobada.**`,
+                content: `> <:management:1279139587448504460> **Esta sugerencia ya está aprobada.**`,
                 ephemeral: true,
               });
             /* Comprobaciones */
@@ -55,12 +55,12 @@ module.exports = (client) => {
                 )
               )
                 return interaction.reply({
-                  content: `> <:no:1198446838819328050> **Solo los Administradores pueden cambiar el estado de una sugerencia ya rechazada.**`,
+                  content: `> <:cross:1279140540901888060> **Solo los Administradores pueden cambiar el estado de una sugerencia ya rechazada.**`,
                   ephemeral: true,
                 });
 
               targetEmbed.data.color = 0xffff00;
-              targetEmbed.fields[0].value = `<:noti:1198447092155297802> \`Pendiente\``;
+              targetEmbed.fields[0].value = `<:notification:1279143649300451419> \`Pendiente\``;
 
               targetMessage.edit({
                 embeds: [targetEmbed],
@@ -81,7 +81,7 @@ module.exports = (client) => {
 
             /* Editar Embed */
             targetEmbed.data.color = 0x57f287;
-            targetEmbed.fields[0].value = `<:yes:1198446878258385026> \`Aprobada\``;
+            targetEmbed.fields[0].value = `<:check:1279140507867418859> \`Aprobada\``;
 
             targetMessage.edit({
               embeds: [targetEmbed],
@@ -109,13 +109,13 @@ module.exports = (client) => {
               )
             )
               return interaction.reply({
-                content: `> <:no:1198446838819328050> **No tienes permisos para utilizar este botón.**`,
+                content: `> <:cross:1279140540901888060> **No tienes permisos para utilizar este botón.**`,
                 ephemeral: true,
               });
 
             if (msgData.status === "rejected")
               return interaction.reply({
-                content: `> <:management:1198448111547318282> **Esta sugerencia ya está rechazada.**`,
+                content: `> <:management:1279139587448504460> **Esta sugerencia ya está rechazada.**`,
                 ephemeral: true,
               });
             /* Comprobaciones */
@@ -128,12 +128,12 @@ module.exports = (client) => {
                 )
               )
                 return interaction.reply({
-                  content: `> <:no:1198446838819328050> **Solo los Administradores pueden cambiar el estado de una sugerencia ya aprobada.**`,
+                  content: `> <:cross:1279140540901888060> **Solo los Administradores pueden cambiar el estado de una sugerencia ya aprobada.**`,
                   ephemeral: true,
                 });
 
               targetEmbed.data.color = 0xffff00;
-              targetEmbed.fields[0].value = `<:noti:1198447092155297802> \`Pendiente\``;
+              targetEmbed.fields[0].value = `<:notification:1279143649300451419> \`Pendiente\``;
 
               targetMessage.edit({
                 embeds: [targetEmbed],
@@ -154,7 +154,7 @@ module.exports = (client) => {
 
             /* Editar Embed */
             targetEmbed.data.color = 0xed4245;
-            targetEmbed.fields[0].value = `<:no:1198446838819328050> \`Rechazada\``;
+            targetEmbed.fields[0].value = `<:cross:1279140540901888060> \`Rechazada\``;
 
             targetMessage.edit({
               embeds: [targetEmbed],
@@ -178,7 +178,7 @@ module.exports = (client) => {
             /* Comprobaciones */
             if (msgData.voteYes.includes(user.id))
               return interaction.reply({
-                content: `> <:error:1198447011448508466> **Ya has votado a favor.**`,
+                content: `> <:warning:1279144320062066748> **Ya has votado a favor.**`,
                 ephemeral: true,
               });
             /* Comprobaciones */
@@ -209,7 +209,7 @@ module.exports = (client) => {
             /* Comprobaciones */
             if (msgData.voteNo.includes(user.id))
               return interaction.reply({
-                content: `> <:error:1198447011448508466> **Ya has votado en contra. **`,
+                content: `> <:warning:1279144320062066748> **Ya has votado en contra. **`,
                 ephemeral: true,
               });
             /* Comprobaciones */
@@ -243,7 +243,7 @@ module.exports = (client) => {
                   .setTitle(`¿Quién ha votado`)
                   .addFields(
                     {
-                      name: `<:yes:1198446878258385026> Votos positivos`,
+                      name: `<:check:1279140507867418859> Votos positivos`,
                       value:
                         msgData.voteYes.length >= 1
                           ? msgData.voteYes
@@ -256,7 +256,7 @@ module.exports = (client) => {
                       inline: true,
                     },
                     {
-                      name: `<:no:1198446838819328050> Votos negativos`,
+                      name: `<:cross:1279140540901888060> Votos negativos`,
                       value:
                         msgData.voteNo.length >= 1
                           ? msgData.voteNo
@@ -279,7 +279,7 @@ module.exports = (client) => {
     } catch (e) {
       console.log(e);
       await interaction.reply({
-        content: `> <:warning:1198447554497618010>** ¡Ocurrió un error al intentar ejecutar el comando!**`,
+        content: `> <:error:1279142677308248238> **¡Ocurrió un error al intentar ejecutar el comando!**`,
         ephemeral: true,
       });
     }

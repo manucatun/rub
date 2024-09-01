@@ -13,7 +13,7 @@ module.exports = async (client, interaction) => {
       const dueños = process.env.OWNERS.split(" ");
       if (!dueños.includes(interaction.user.id))
         return interaction.reply({
-          content: `> <:no:1198446838819328050> **Solo los dueños de ${client.user.username} pueden utilizar este comando.**`,
+          content: `> <:cross:1279140540901888060> **Solo los dueños de ${client.user.username} pueden utilizar este comando.**`,
           ephemeral: true,
         });
     }
@@ -21,7 +21,7 @@ module.exports = async (client, interaction) => {
     if (comando.botPerms) {
       if (!interaction.guild.members.me.permissions.has(comando.botPerms))
         return interaction.reply({
-          content: `> <:error:1198447011448508466> **No tengo suficientes permisos para ejecutar este comando.**`,
+          content: `> <:warning:1279144320062066748> **No tengo suficientes permisos para ejecutar este comando.**`,
           ephemeral: true,
         });
     }
@@ -29,7 +29,7 @@ module.exports = async (client, interaction) => {
     if (comando.perms) {
       if (!interaction.member.permissions.has(comando.perms))
         return interaction.reply({
-          content: `> <:no:1198446838819328050> **No tienes suficientes permisos para ejecutar este comando.**`,
+          content: `> <:cross:1279140540901888060> **No tienes suficientes permisos para ejecutar este comando.**`,
           ephemeral: true,
         });
     }
@@ -38,7 +38,7 @@ module.exports = async (client, interaction) => {
       comando.execute(client, interaction, "/");
     } catch (e) {
       interaction.reply({
-        content: `> <:warning:1198447554497618010> **¡Ocurrió un error al intentar ejecutar el comando!**`,
+        content: `> <:error:1279142677308248238> **¡Ocurrió un error al intentar ejecutar el comando!**`,
         ephemeral: true,
       });
       console.log(e);

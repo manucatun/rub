@@ -19,9 +19,9 @@ module.exports = {
         (miembro, index) =>
           `${medallas[index + 1] ?? ""} \`${index + 1}\` • <@${
             miembro.userID
-          }>\n**Balance General:** <:coinIcon:1240873651956482139> ${Math.floor(
+          }>\n**Balance General:** <:coin:1279135394918694922> ${Math.floor(
             miembro.cash + miembro.bank
-          ).toLocaleString()} monedas\n**Efectivo:** <:coinIcon:1240873651956482139> ${miembro.cash.toLocaleString()} monedas • **Banco:** <:coinIcon:1240873651956482139> ${miembro.bank.toLocaleString()} monedas\n\n`
+          ).toLocaleString()} monedas\n**Efectivo:** <:coin:1279135394918694922> ${miembro.cash.toLocaleString()} monedas • **Banco:** <:coin:1279135394918694922> ${miembro.bank.toLocaleString()} monedas\n\n`
       );
 
       paginacion(
@@ -34,7 +34,7 @@ module.exports = {
     } catch (e) {
       console.log(e);
       interaction.reply({
-        content: `> <:error:1198447011448508466> **¡Ocurrió un error al intentar ejecutar el comando!**`,
+        content: `> <:error:1279142677308248238> **¡Ocurrió un error al intentar ejecutar el comando!**`,
         ephemeral: true,
       });
     }

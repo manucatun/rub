@@ -63,7 +63,7 @@ module.exports = {
               iconURL: client.user.avatarURL({ extension: "png", size: 1024 }),
             })
             .setDescription(
-              `<:management:1198448111547318282> Se recargaron todos los procesos de \`${seleccionado}\` correctamente.`
+              `<:management:1279139587448504460> Se recargaron todos los procesos de \`${seleccionado}\` correctamente.`
             )
             /* .setColor(process.env.COLOR) */,
         ],
@@ -71,7 +71,7 @@ module.exports = {
     } catch (e) {
       console.log(e);
       interaction.reply({
-        content: `> <:error:1198447011448508466> **¡Ocurrió un error al intentar ejecutar el comando!**`,
+        content: `> <:error:1279142677308248238> **¡Ocurrió un error al intentar ejecutar el comando!**`,
         ephemeral: true,
       });
     }

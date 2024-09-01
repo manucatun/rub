@@ -31,7 +31,7 @@ module.exports = {
             const endTime = Date.now();
 
             interaction.reply({
-              content: `> <:connection:1229255988591202304> **Latencia de ${
+              content: `> <:connection:1279135895886495857> **Latencia de ${
                 client.user.username
               }:** \`${client.ws.ping}ms\` • **Base de Datos:** \`${
                 endTime - startTime
@@ -78,7 +78,7 @@ module.exports = {
                       name: `Información General`,
                       value: [
                         `📋 • **ID:** \`${client.user.id}\``,
-                        `<:owner:1198448330641002548> • **Dueño:** ${
+                        `<:owner:1279140156565225627> • **Dueño:** ${
                           client.application.owner || "`No disponible`"
                         }`,
                         `🌍 • **Nombre:** ${client.user.username}`,
@@ -90,7 +90,7 @@ module.exports = {
                     {
                       name: `Sistema`,
                       value: [
-                        `<:connection:1229255988591202304> • **Base de Datos:** ${
+                        `<:connection:1279135895886495857> • **Base de Datos:** ${
                           estado[mongoose.connection.readyState]
                         }`,
                         `💻 • **Modelo:** ${os
@@ -108,21 +108,21 @@ module.exports = {
                     {
                       name: `Versiones`,
                       value: [
-                        `<:developer:1198448425105109063> • **Cliente:** <:beta:1229539225050026044> v8.0`,
-                        `<:node_js:1229536843528273988> • **Node.js:** ${process.version}`,
-                        `<:DiscordJS:1229536959836192941> • **Discord.js:** v${version}`,
+                        `<:developer:1279139485421932645> • **Cliente:** <:beta:1279135686280351764> v9.0`,
+                        `<:nodejs:1279145430097203230> • **Node.js:** ${process.version}`,
+                        `<:discordjs:1279146433433305108> • **Discord.js:** v${version}`,
                       ].join("\n"),
                     },
                     {
                       name: `Estadísticas`,
                       value: [
-                        `<:bot:1198447609187143792> • **Comandos:** ${client.slashCommands.size}`,
-                        `<:connection:1229255988591202304> • **Ping:** ${client.ws.ping}`,
-                        `<:time:1198844708655485048> • **Tiempo de Actividad:** <t:${parseInt(
+                        `<:bot:1279142542306185368> • **Comandos:** ${client.slashCommands.size}`,
+                        `<:connection:1279135895886495857> • **Ping:** ${client.ws.ping}`,
+                        `<:time:1279138439417303161> • **Tiempo de Actividad:** <t:${parseInt(
                           client.readyTimestamp / 1000
                         )}:R>`,
                         `🏡 • **Servidores:** ${client.guilds.cache.size}`,
-                        `<:members:1198448160847188050> • **Usuarios:** ${client.users.cache.size}`,
+                        `<:members:1279140407720022148> • **Usuarios:** ${client.users.cache.size}`,
                         `💬 • **Canales de Texto:** ${tipoCanal([
                           ChannelType.GuildText,
                           ChannelType.GuildAnnouncement,
@@ -161,13 +161,13 @@ module.exports = {
                   .addFields({
                     name: `Contacto`,
                     value: [
-                      `<:developer:1198448425105109063> • **Desarrollador:** manucatun`,
-                      `<:guidelines:1198447843317403728> • **Servidor:** [Rub Development](https://discord.com/invite/S7VbXG8eK8)`,
+                      `<:developer:1279139485421932645> • **Desarrollador:** manucatun`,
+                      `<:guidelines:1279141342399823984> • **Servidor:** [Rub Development](https://discord.com/invite/S7VbXG8eK8)`,
                     ].join("\n"),
                   })
                   /* .setColor(process.env.COLOR) */,
               ],
-              content: `> <:info:1198447934568669274> Servidor de Soporte: https://discord.com/invite/S7VbXG8eK8`,
+              content: `> <:info:1279140604517023785> Servidor de Soporte: https://discord.com/invite/S7VbXG8eK8`,
             });
           }
           break;
@@ -175,7 +175,7 @@ module.exports = {
     } catch (e) {
       console.log(e);
       interaction.reply({
-        content: `> <:error:1198447011448508466> **¡Ocurrió un error al intentar ejecutar el comando!**`,
+        content: `> <:error:1279142677308248238> **¡Ocurrió un error al intentar ejecutar el comando!**`,
         ephemeral: true,
       });
     }

@@ -31,7 +31,7 @@ module.exports = {
       const palabras = texto.trim().split(/\s+/);
       if (palabras.length > 15) {
         return interaction.reply({
-          content: `> <:no:1198446838819328050> **El texto es demasiado largo, asegúrate de que sean menos de 15 palabras.**`,
+          content: `> <:cross:1279140540901888060> **El texto es demasiado largo, asegúrate de que sean menos de 15 palabras.**`,
           ephemeral: true,
         });
       }
@@ -40,13 +40,13 @@ module.exports = {
         id = channel.messages.cache.get(id);
         if (!id) {
           return interaction.reply({
-            content: `> <:no:1198446838819328050> **No pude encontrar el Id del mensaje en este canal.**`,
+            content: `> <:cross:1279140540901888060> **No pude encontrar el Id del mensaje en este canal.**`,
             ephemeral: true,
           });
         }
 
         await interaction.reply({
-          content: `> <:bot:1198447609187143792> **${client.user.username} repetirá:**\n\`\`\`yml\n${texto}\`\`\``,
+          content: `> <:bot:1279142542306185368> **${client.user.username} repetirá:**\n\`\`\`yml\n${texto}\`\`\``,
           ephemeral: true,
         });
         channel.sendTyping();
@@ -57,13 +57,13 @@ module.exports = {
           .last();
         if (!usuario) {
           return interaction.reply({
-            content: `> <:no:1198446838819328050> **No pude encontrar el último mensaje del usuario en este canal.**`,
+            content: `> <:cross:1279140540901888060> **No pude encontrar el último mensaje del usuario en este canal.**`,
             ephemeral: true,
           });
         }
 
         await interaction.reply({
-          content: `> <:bot:1198447609187143792> **${client.user.username} repetirá:**\n\`\`\`yml\n${texto}\`\`\``,
+          content: `> <:bot:1279142542306185368> **${client.user.username} repetirá:**\n\`\`\`yml\n${texto}\`\`\``,
           ephemeral: true,
         });
         channel.sendTyping();
@@ -72,7 +72,7 @@ module.exports = {
       /* Comprobaciones */
 
       await interaction.reply({
-        content: `> <:bot:1198447609187143792> **${client.user.username} repetirá:**\n\`\`\`yml\n${texto}\`\`\``,
+        content: `> <:bot:1279142542306185368> **${client.user.username} repetirá:**\n\`\`\`yml\n${texto}\`\`\``,
         ephemeral: true,
       });
       channel.sendTyping();
@@ -80,7 +80,7 @@ module.exports = {
     } catch (e) {
       console.log(e);
       interaction.reply({
-        content: `> <:error:1198447011448508466> **¡Ocurrió un error al intentar ejecutar el comando!**`,
+        content: `> <:error:1279142677308248238> **¡Ocurrió un error al intentar ejecutar el comando!**`,
         ephemeral: true,
       });
     }

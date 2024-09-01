@@ -38,7 +38,7 @@ module.exports = {
         cantidad > data.bank
       ) {
         return await interaction.reply({
-          content: `> <:no:1198446838819328050> **No es una cantidad válida para retirar.**`,
+          content: `> <:cross:1279140540901888060> **No es una cantidad válida para retirar.**`,
           ephemeral: true,
         });
       }
@@ -62,19 +62,19 @@ module.exports = {
               iconURL: user.avatarURL({ extension: "png", size: 1024 }),
             })
             .setDescription(
-              `💸 Has retirado <:coinIcon:1240873651956482139> **${cantidad.toLocaleString()} monedas** de tu cuenta bancaria.\n`
+              `💸 Has retirado <:coin:1279135394918694922> **${cantidad.toLocaleString()} monedas** de tu cuenta bancaria.\n`
             )
             .addFields(
               {
                 name: `Balance de Efectivo`,
-                value: `<:coinIcon:1240873651956482139> ${Math.floor(
+                value: `<:coin:1279135394918694922> ${Math.floor(
                   data.cash + parseInt(cantidad)
                 ).toLocaleString()} monedas`,
                 inline: true,
               },
               {
                 name: `Balance de Cuenta Bancaria`,
-                value: `<:coinIcon:1240873651956482139> ${Math.floor(
+                value: `<:coin:1279135394918694922> ${Math.floor(
                   data.bank - parseInt(cantidad)
                 ).toLocaleString()} monedas`,
                 inline: true,
@@ -90,7 +90,7 @@ module.exports = {
     } catch (e) {
       console.log(e);
       interaction.reply({
-        content: `> <:error:1198447011448508466> **¡Ocurrió un error al intentar ejecutar el comando!**`,
+        content: `> <:error:1279142677308248238> **¡Ocurrió un error al intentar ejecutar el comando!**`,
         ephemeral: true,
       });
     }

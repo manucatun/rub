@@ -17,7 +17,7 @@ module.exports = {
       const miembro = options.getMember("usuario") || member;
       if (usuario.bot || miembro.bot) {
         return interaction.reply({
-          content: `> <:no:1198446838819328050> **Este usuario no puede tener una cuenta de economía.**`,
+          content: `> <:cross:1279140540901888060> **Este usuario no puede tener una cuenta de economía.**`,
           ephemeral: true,
         });
       }
@@ -28,7 +28,7 @@ module.exports = {
       });
       if (!data) {
         return interaction.reply({
-          content: `> <:no:1198446838819328050> **Este usuario actualmente no tiene una cuenta de economía.**`,
+          content: `> <:cross:1279140540901888060> **Este usuario actualmente no tiene una cuenta de economía.**`,
           ephemeral: true,
         });
       }
@@ -43,11 +43,11 @@ module.exports = {
             .addFields(
               {
                 name: `💵 Efectivo`,
-                value: `<:coinIcon:1240873651956482139> ${data.cash.toLocaleString()} monedas`,
+                value: `<:coin:1279135394918694922> ${data.cash.toLocaleString()} monedas`,
               },
               {
                 name: `💰 Cuenta Bancaria`,
-                value: `<:coinIcon:1240873651956482139> ${data.bank.toLocaleString()} monedas`,
+                value: `<:coin:1279135394918694922> ${data.bank.toLocaleString()} monedas`,
               }
             )
             /* .setColor(process.env.COLOR) */
@@ -60,7 +60,7 @@ module.exports = {
     } catch (e) {
       console.log(e);
       interaction.reply({
-        content: `> <:error:1198447011448508466> **¡Ocurrió un error al intentar ejecutar el comando!**`,
+        content: `> <:error:1279142677308248238> **¡Ocurrió un error al intentar ejecutar el comando!**`,
         ephemeral: true,
       });
     }

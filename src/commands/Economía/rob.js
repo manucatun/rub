@@ -20,7 +20,7 @@ module.exports = {
       const miembro = options.getMember("usuario");
       if (usuario.id === user.id || usuario.bot) {
         return interaction.reply({
-          content: `> <:no:1198446838819328050> **No es posible intentar robar a este usuario.**`,
+          content: `> <:cross:1279140540901888060> **No es posible intentar robar a este usuario.**`,
           ephemeral: true,
         });
       }
@@ -47,7 +47,7 @@ module.exports = {
         );
 
         return await interaction.reply({
-          content: `> <:time:1198844708655485048> **Podrás volver a intentar robar a otro usuario <t:${tiempoRes}:R>.**`,
+          content: `> <:time:1279138439417303161> **Podrás volver a intentar robar a otro usuario <t:${tiempoRes}:R>.**`,
           ephemeral: true,
         });
       }
@@ -60,7 +60,7 @@ module.exports = {
         recompensa > dataUsuario.cash
       ) {
         return await interaction.reply({
-          content: `> <:no:1198446838819328050> **No es posible intentar robar a este usuario.**`,
+          content: `> <:cross:1279140540901888060> **No es posible intentar robar a este usuario.**`,
           ephemeral: true,
         });
       }
@@ -94,7 +94,7 @@ module.exports = {
                 iconURL: user.avatarURL({ extension: "png", size: 1024 }),
               })
               .setDescription(
-                `💸 ¡El robo fue un éxito, obtuviste una recompensa de <:coinIcon:1240873651956482139> **${recompensa.toLocaleString()} monedas**!\n`
+                `💸 ¡El robo fue un éxito, obtuviste una recompensa de <:coin:1279135394918694922> **${recompensa.toLocaleString()} monedas**!\n`
               )
               /* .setColor(process.env.COLOR) */
               .setFooter({
@@ -131,7 +131,7 @@ module.exports = {
                 iconURL: user.avatarURL({ extension: "png", size: 1024 }),
               })
               .setDescription(
-                `🚨 ¡El robo ha fallado, no obtuviste ninguna recompensa y fuiste capturado! Perdiste <:coinIcon:1240873651956482139> **${recompensa.toLocaleString()} monedas**.\n`
+                `🚨 ¡El robo ha fallado, no obtuviste ninguna recompensa y fuiste capturado! Perdiste <:coin:1279135394918694922> **${recompensa.toLocaleString()} monedas**.\n`
               )
               .setColor("Red")
               .setFooter({
@@ -144,7 +144,7 @@ module.exports = {
     } catch (e) {
       console.log(e);
       interaction.reply({
-        content: `> <:error:1198447011448508466> **¡Ocurrió un error al intentar ejecutar el comando!**`,
+        content: `> <:error:1279142677308248238> **¡Ocurrió un error al intentar ejecutar el comando!**`,
         ephemeral: true,
       });
     }

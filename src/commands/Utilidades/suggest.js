@@ -34,14 +34,14 @@ module.exports = {
       !guild.channels.cache.get(data.suggestions)
     )
       return interaction.reply({
-        content: `> <:management:1198448111547318282> **No se ha establecido un canal para enviar sugerencias en el servidor.**`,
+        content: `> <:management:1279139587448504460> **No se ha establecido un canal para enviar sugerencias en el servidor.**`,
         ephemeral: true,
       });
 
     const canal = guild.channels.cache.get(data.suggestions);
     if (!canal)
       return interaction.reply({
-        content: `> <:management:1198448111547318282> **No se ha establecido un canal para enviar sugerencias en el servidor.**`,
+        content: `> <:management:1279139587448504460> **No se ha establecido un canal para enviar sugerencias en el servidor.**`,
         ephemeral: true,
       });
     /* Comprobaciones */
@@ -90,7 +90,7 @@ module.exports = {
             .addFields(
               {
                 name: `Estado`,
-                value: `<:noti:1198447092155297802> \`Pendiente\``,
+                value: `<:notification:1279143649300451419> \`Pendiente\``,
               },
               { name: `Votos`, value: formatoResultados() }
             )
@@ -119,11 +119,11 @@ module.exports = {
           ]),
           new ActionRowBuilder().addComponents([
             new ButtonBuilder()
-              .setEmoji("1198446878258385026")
+              .setEmoji("1279140507867418859")
               .setCustomId("aprobar")
               .setStyle("Secondary"),
             new ButtonBuilder()
-              .setEmoji("1198446838819328050")
+              .setEmoji("1279140540901888060")
               .setCustomId("denegar")
               .setStyle("Secondary"),
           ]),
@@ -142,7 +142,7 @@ module.exports = {
       });
 
       modalInteraction.editReply({
-        content: `> <:new:1198448546207248606> **¡Tu sugerencia se creó correctamente!**`,
+        content: `> <:newmember:1279138879349456916> **¡Tu sugerencia se creó correctamente!**`,
       });
     } catch (e) {
       if (e.code === "InteractionCollectorError") {
@@ -152,7 +152,7 @@ module.exports = {
       } else {
         console.log(e);
         modalInteraction.editReply({
-          content: `> <:warning:1198447554497618010> **¡Ocurrió un error al intentar ejecutar el comando!**`,
+          content: `> <:error:1279142677308248238> **¡Ocurrió un error al intentar ejecutar el comando!**`,
           ephemeral: true,
         });
       }

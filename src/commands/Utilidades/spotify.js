@@ -1,689 +1,385 @@
 const {
   SlashCommandBuilder,
-  AttachmentBuilder,
   EmbedBuilder,
-  ActionRowBuilder,
-  StringSelectMenuBuilder,
-  StringSelectMenuOptionBuilder,
-  ModalBuilder,
-  TextInputBuilder,
-  TextInputStyle,
+  AttachmentBuilder,
 } = require("discord.js");
+const canvafy = require("canvafy");
 const Canvas = require("@napi-rs/canvas");
 const moment = require("moment");
 const { getAverageColor } = require("fast-average-color-node");
-const { Client } = require("genius-lyrics");
-const geniusClient = new Client(
-  "47XVh9RXZwamYGOVqeYGX0oLkCR1JuwJW2-ckaS4upkn-deF6nYxoj_c4fJ-6vqO"
-);
+const { spotifyApi } = require("../../events/client/ready");
 module.exports = {
   CMD: new SlashCommandBuilder()
-    .setDescription("🎶 Muestra la actividad de Spotify")
-    .addUserOption((option) =>
-      option
-        .setName("usuario")
-        .setDescription("¿De qué usuario quieres ver la información?")
+    .setDescription("🎶 Muestra la actividad en Spotify de un usuario")
+    .addSubcommand((sub) =>
+      sub
+        .setName("track")
+        .setDescription(
+          "Observa la información sobre la canción que está sonando"
+        )
+        .addUserOption((option) =>
+          option
+            .setName("usuario")
+            .setDescription("¿De qué usuario quieres ver la información?")
+        )
+    )
+    .addSubcommand((sub) =>
+      sub
+        .setName("album")
+        .setDescription(
+          "Observa la información sobre el álbum de la canción que está sonando"
+        )
+        .addUserOption((option) =>
+          option
+            .setName("usuario")
+            .setDescription("¿De qué usuario quieres ver la información?")
+        )
+    )
+    .addSubcommand((sub) =>
+      sub
+        .setName("artist")
+        .setDescription(
+          "Observa la información sobre el autor de la canción que está sonando"
+        )
+        .addUserOption((option) =>
+          option
+            .setName("usuario")
+            .setDescription("¿De qué usuario quieres ver la información?")
+        )
     ),
 
-  async execute(client, interaction) {
-    try {
-      const miembro =
-        interaction.options.getMember("usuario") || interaction.member;
+  async execute(client, interaction, prefix) {
+    const { options, guild, user, member } = interaction;
 
+    try {
       /* Encontrar Actividad */
-      let actividad = await miembro.presence;
+      let actividad = member.presence;
       if (!actividad) {
         return interaction.reply({
-          content: `> <:error:1198447011448508466> **El usuario no está escuchando Spotify en este momento.**`,
+          content: `> <:cross:1279140540901888060> **El usuario no se encuentra escuchando Spotify en este momento.**`,
           ephemeral: true,
         });
       }
+
       actividad = actividad.activities.filter(
-        (act) => act.name === "Spotify" && act.details
+        (x) => x.name === "Spotify" && x.details
       );
       if (!actividad.length) {
         return interaction.reply({
-          content: `> <:error:1198447011448508466> **El usuario no está escuchando Spotify en este momento.**`,
+          content: `> <:cross:1279140540901888060> **El usuario no se encuentra escuchando Spotify en este momento.**`,
           ephemeral: true,
         });
       }
+
       actividad = actividad[0];
       /* Encontrar Actividad */
 
       await interaction.deferReply();
 
-      /* Crear Menu */
-      const menu = new ActionRowBuilder().addComponents(
-        new StringSelectMenuBuilder()
-          .setCustomId("menu")
-          .setPlaceholder("🎶 Edita la imagen!")
-          .addOptions(
-            new StringSelectMenuOptionBuilder()
-              .setLabel("VERTICAL - Original")
-              .setDescription("La imagen en formato vertical.")
-              .setValue("vertical")
-              .setEmoji("📒"),
-            new StringSelectMenuOptionBuilder()
-              .setLabel("HORIZONTAL - Original")
-              .setDescription("La imagen en formato horizontal.")
-              .setValue("horizontal")
-              .setEmoji("📂"),
-            new StringSelectMenuOptionBuilder()
-              .setLabel("LETRA - [BETA]")
-              .setDescription("La imagen con la letra de la canción.")
-              .setValue("lyrics")
-              .setEmoji("🎶")
-          )
-      );
-      /* Crear Menu */
+      switch (options.getSubcommand()) {
+        case "track":
+          {
+            const data = await spotifyApi.getTrack(actividad.syncId);
 
-      let msg = await interaction.editReply({
-        embeds: [
-          new EmbedBuilder()
-            .setAuthor({
-              name: interaction.member.displayName + ` está escuchando Spotify`,
-              iconURL: interaction.user.avatarURL({
-                extension: "png",
-                size: 1024,
-              }),
-            })
-            .setDescription(
-              `¡Selecciona una opción del menú para generar la imagen!`
-            )
-            .addFields(
-              { name: `🎶 Canción`, value: `${actividad.details}` },
-              { name: `👥 Artista(s)`, value: `${actividad.state}` }
-            )
-            .setThumbnail(
-              `https://i.scdn.co/image/${
-                actividad.assets.largeImage.split(":")[1]
-              }`
-            )
-            .setFooter({
-              text: `Powered by manucatun`,
-              iconURL: `https://static.independent.co.uk/2023/04/10/12/GettyImages-1399738189.jpg?width=1200&height=1200&fit=crop`,
-            })
-            /* .setColor(process.env.COLOR) */
-            .setTimestamp(),
-        ],
-        components: [menu],
-      });
+            const track = data.body;
 
-      const collector = msg.createMessageComponentCollector({
-        filter: (i) =>
-          i.isSelectMenu() && i.user && i.message.author.id == client.user.id,
-        time: 180e3,
-      });
-
-      collector.on("collect", async (i) => {
-        if (i.user.id !== interaction.user.id) {
-          return i.reply({
-            content: `> <:error:1198447011448508466> **Solo la persona que utilizó el comando puede seleccionar esta opción.**`,
-            ephemeral: true,
-          });
-        }
-
-        /* Valores por Defecto */
-        let songImage = actividad.assets.largeImage.split(":")[1];
-        songImage = await Canvas.loadImage(
-          `https://i.scdn.co/image/${songImage}`
-        );
-
-        const botAvatar = await Canvas.loadImage(
-          client.user.avatarURL({ format: "png" })
-        );
-
-        const spotifyLogo = await Canvas.loadImage(
-          `https://cdn.discordapp.com/emojis/1223111980160647198.png`
-        );
-
-        const now = moment();
-        const startTime = moment(actividad.timestamps.start);
-        const duration = moment(actividad.timestamps.end).diff(startTime);
-        const playbackTime = now.diff(startTime);
-        const playbackTimeFormatted = moment(playbackTime).format("mm:ss");
-        const durationFormatted = moment(duration).format("mm:ss");
-        const fillBar = (546 / duration) * playbackTime;
-        /* Valores por Defecto */
-
-        switch (i.values[0]) {
-          case "vertical":
-            {
-              const file = imgVertical(
-                actividad,
-                songImage,
-                botAvatar,
-                spotifyLogo,
-                startTime,
-                durationFormatted,
-                playbackTimeFormatted,
-                fillBar
-              );
-
-              const fileBuffer = new AttachmentBuilder(file.attachment, {
-                name: "spotify.png",
-              });
-
-              const targetEmbed = await msg.embeds[0];
-              const newEmbed = EmbedBuilder.from(targetEmbed).setImage(
-                `attachment://${fileBuffer.name}`
-              );
-
-              await i.deferUpdate();
-
-              msg = await msg.edit({
-                embeds: [newEmbed],
-                files: [fileBuffer],
-                disableMentions: { parse: ["users"] },
-              });
-
-              await collector.resetTimer();
-            }
-            break;
-
-          case "lyrics": {
-            /* Encontrar Letra */
-            const search = await geniusClient.songs.search(
-              `${actividad.details} ${actividad.state}`
+            /* DATA */
+            const nombre = track.name;
+            const artistas = track.artists.map((a) => {
+              return { name: a.name, url: a.external_urls.spotify };
+            });
+            const url = track.external_urls.spotify;
+            const lanzamiento = Math.floor(
+              new Date(track.album.release_date).getTime() / 1000
             );
-            if (
-              search.length === 0 ||
-              actividad.state.split(";")[0].toLowerCase() !==
-                search[0].artist.name.split(",")[0].toLowerCase()
-            ) {
-              return i.reply({
-                content: `> <:error:1198447011448508466> **No he podido encontrar la letra de la canción actual.**`,
-                ephemeral: true,
-              });
-            }
+            const img = track.album.images[0]?.url;
+            const album =
+              track.album.album_type === "album" || track.album.total_tracks > 2
+                ? `[${track.album.name}](${track.album.external_urls.spotify})`
+                : "Sencillo";
+            const minutos = Math.floor(track.duration_ms / 60000);
+            const segundos = Math.floor((track.duration_ms % 60000) / 1000);
+            const now = moment();
+            const startTime = moment(actividad.timestamps.start);
+            const playbackTime = now.diff(startTime);
+            const color = await getAverageColor(img);
+            /* DATA */
 
-            let letra = await search[0].lyrics();
-            letra = letra.replace(/\[[^\]]*\]/g, "").replace(/\n\n/g, "\n");
-            /* Encontrar Letra */
-
-            /* Crear Modal */
-            const modal = new ModalBuilder()
-              .setTitle(
-                `🎶 Letra de ${search[0].title} • ${
-                  search[0].artist.name.split(",")[0]
-                }`.substring(0, 45)
+            /* GENERAR IMAGEN */
+            const imagen = await new canvafy.Spotify()
+              .setAuthor(artistas.map((a) => `${a.name}`).join(", "))
+              .setAlbum(
+                `${
+                  track.album.album_type === "album" ||
+                  track.album.total_tracks > 2
+                    ? `${track.album.name}`
+                    : "Sencillo"
+                }`
               )
-              .setCustomId(`lyrics-song`);
+              .setTimestamp(playbackTime, track.duration_ms)
+              .setImage(img)
+              .setTitle(nombre)
+              .setBlur(5)
+              .setOverlayOpacity(0.7)
+              .build();
+            /* GENERAR IMAGEN */
 
-            modal.addComponents(
-              new ActionRowBuilder().addComponents(
-                new TextInputBuilder()
-                  .setCustomId(`modalLyrics`)
-                  .setLabel(`Selecciona solamente un párrafo`)
-                  .setStyle(TextInputStyle.Paragraph)
-                  .setRequired(true)
-                  .setMaxLength(letra.length)
-                  .setMinLength(50)
-                  .setValue(
-                    letra ? letra : "Introduce la letra de la canción aquí"
+            const attachment = new AttachmentBuilder(imagen, {
+              name: "spotify_image.png",
+            });
+
+            interaction.editReply({
+              content: `¡${user} está escuchando [__**${nombre}** de **${artistas[0].name}**__](${url}) en <:spotify:1279145987574595685> **Spotify**!`,
+              files: [attachment],
+              embeds: [
+                new EmbedBuilder()
+                  .setAuthor({
+                    name: `${member.displayName} está escuchando Spotify`,
+                    iconURL: user.avatarURL({ extension: "png", size: 1024 }),
+                  })
+                  .setTitle(`${nombre}`)
+                  .setURL(url)
+                  .setThumbnail(img)
+                  .setImage(`attachment://${attachment.name}`)
+                  .addFields(
+                    {
+                      name: `🎙 Artista(s)`,
+                      value: artistas
+                        .map((a) => `[${a.name}](${a.url})`)
+                        .join(", "),
+                    },
+                    {
+                      name: `📅 Lanzamiento`,
+                      value: `<t:${lanzamiento}:D> • <t:${lanzamiento}:R>`,
+                    },
+                    {
+                      name: `💿 Álbum`,
+                      value: `${album}`,
+                      inline: true,
+                    },
+                    {
+                      name: `🗣 Popularidad`,
+                      value: `${track.popularity}%`,
+                      inline: true,
+                    },
+                    {
+                      name: `<:time:1279138439417303161> Duración`,
+                      value: `${minutos}:${segundos}`,
+                      inline: true,
+                    }
                   )
-              )
-            );
+                  .setColor(color.hex),
+              ],
+            });
+          }
+          break;
 
-            let resultado;
+        case "album":
+          {
+            const song = await spotifyApi.getTrack(actividad.syncId);
+            const data = await spotifyApi.getAlbum(song.body.album.id);
 
-            try {
-              await i.showModal(modal);
-              const submittedModal = await i.awaitModalSubmit({
-                filter: (interaction) => interaction.customId === `lyrics-song`,
-                time: 180e3,
+            if (
+              song.body.album.album_type === "single" &&
+              data.body.total_tracks === 1
+            ) {
+              return interaction.editReply({
+                content: `> <:cross:1279140540901888060> **La canción actual no pertenece a un álbum, utiliza el comando </test track:1270951702912172142> para ver la información del sencillo.**`,
               });
-
-              await submittedModal.deferUpdate({ ephemeral: true });
-
-              resultado =
-                submittedModal.fields.getTextInputValue("modalLyrics");
-              if (
-                resultado.split("\n\n").length > 1 ||
-                resultado.split("\n").length > 6
-              ) {
-                return i.followUp({
-                  content: `> <:error:1198447011448508466> **El tamaño máximo debe ser de un solo párrafo o 6 líneas.**`,
-                  ephemeral: true,
-                });
-              }
-
-              console.log(resultado);
-            } catch (e) {
-              if (e.code === "InteractionCollectorError") {
-                return;
-              } else if (e instanceof DiscordAPIError && e.code === 10008) {
-                return console.log(e);
-              } else {
-                console.error(e);
-                return await submittedModal.editReply({
-                  content: `> <:error:1198447011448508466> **Ha ocurrido un error al mostrar la letra de la canción.**`,
-                  ephemeral: true,
-                });
-              }
             }
-            /* Crear Modal */
 
-            const file = imgLyrics(
-              actividad,
-              songImage,
-              botAvatar,
-              spotifyLogo,
-              resultado
+            const track = data.body;
+
+            /* DATA */
+            const nombre = track.name;
+            const artistas = track.artists.map((a) => {
+              return { name: a.name, url: a.external_urls.spotify };
+            });
+            const url = track.external_urls.spotify;
+            const lanzamiento = Math.floor(
+              new Date(track.release_date).getTime() / 1000
             );
+            const img = track.images[0]?.url;
+            const cancionActual = song.body.track_number;
+            const cancionesTotales = track.total_tracks;
+            const color = await getAverageColor(img);
+            /* DATA */
 
-            const fileBuffer = new AttachmentBuilder(file.attachment, {
-              name: "spotify.png",
+            /* GENERAR IMAGEN */
+            const imagen = await new canvafy.Spotify()
+              .setAuthor(artistas.map((a) => `${a.name}`).join(", "))
+              .setAlbum(`Álbum`)
+              .setTimestamp(
+                Math.floor(cancionActual * 60000),
+                Math.floor(cancionesTotales * 60000)
+              )
+              .setImage(img)
+              .setTitle(nombre)
+              .setBlur(5)
+              .setOverlayOpacity(0.7)
+              .build();
+            /* GENERAR IMAGEN */
+
+            const attachment = new AttachmentBuilder(imagen, {
+              name: "spotify_image.png",
             });
 
-            const targetEmbed = await msg.embeds[0];
-            const newEmbed = EmbedBuilder.from(targetEmbed).setImage(
-              `attachment://${fileBuffer.name}`
+            interaction.editReply({
+              content: `¡${user} está escuchando el álbum [__**${nombre}** de **${artistas[0].name}**__](${url}) en <:spotify:1279145987574595685> **Spotify**!`,
+              files: [attachment],
+              embeds: [
+                new EmbedBuilder()
+                  .setAuthor({
+                    name: `${member.displayName} está escuchando Spotify`,
+                    iconURL: user.avatarURL({ extension: "png", size: 1024 }),
+                  })
+                  .setTitle(`${nombre}`)
+                  .setURL(url)
+                  .setThumbnail(img)
+                  .setImage(`attachment://${attachment.name}`)
+                  .addFields(
+                    {
+                      name: `🎙 Artista(s)`,
+                      value: artistas
+                        .map((a) => `[${a.name}](${a.url})`)
+                        .join(", "),
+                    },
+                    {
+                      name: `📅 Lanzamiento`,
+                      value: `<t:${lanzamiento}:D> • <t:${lanzamiento}:R>`,
+                    },
+                    {
+                      name: `💿 Cantidad de Canciones`,
+                      value: `${cancionesTotales}`,
+                      inline: true,
+                    },
+                    {
+                      name: `🔊 Canción Actual`,
+                      value: `[${song.body.name}](${song.body.external_urls.spotify})`,
+                      inline: true,
+                    },
+                    {
+                      name: `🗣 Popularidad`,
+                      value: `${track.popularity}%`,
+                      inline: true,
+                    },
+                    {
+                      name: `💽 Sello Discográfico`,
+                      value: `${track.label}`,
+                    }
+                  )
+                  .setColor(color.hex),
+              ],
+            });
+          }
+          break;
+
+        case "artist": {
+          try {
+            const song = await spotifyApi.getTrack(actividad.syncId);
+            const data = await spotifyApi.getArtist(song.body.artists[0].id);
+            const songs = await spotifyApi.getArtistTopTracks(
+              song.body.artists[0].id
             );
 
-            msg = await msg.edit({
-              embeds: [newEmbed],
-              files: [fileBuffer],
-              disableMentions: { parse: ["users"] },
+            const track = data.body;
+
+            /* DATA */
+            const nombre = track.name;
+            const url = track.external_urls.spotify;
+            const seguidores = track.followers.total;
+            const img = track.images[0]?.url;
+            const cancionActual = song.body.name;
+            const generos = track.genres
+              .slice(0, 3)
+              .map((genre) => genre.charAt(0).toUpperCase() + genre.slice(1))
+              .join(", ");
+            const cancionesPopulares = songs.body.tracks
+              .slice(0, 3)
+              .map((track, index) => {
+                return `\`${index + 1}\` [${track.name}](${
+                  track.external_urls.spotify
+                })`;
+              })
+              .filter((track) => track.trim() != "")
+              .join("\n");
+            const color = await getAverageColor(img);
+            const now = moment();
+            const startTime = moment(actividad.timestamps.start);
+            const playbackTime = now.diff(startTime);
+            /* DATA */
+
+            /* GENERAR IMAGEN */
+            const imagen = await new canvafy.Spotify()
+              .setAuthor(`Artista`)
+              .setAlbum(`${seguidores.toLocaleString()} seguidores`)
+              .setTimestamp(playbackTime, song.body.duration_ms)
+              .setImage(img)
+              .setTitle(nombre)
+              .setBlur(5)
+              .setOverlayOpacity(0.7)
+              .build();
+            /* GENERAR IMAGEN */
+
+            const attachment = new AttachmentBuilder(imagen, {
+              name: "spotify_image.png",
             });
 
-            await collector.resetTimer();
+            interaction.editReply({
+              content: `¡${user} está escuchando a [__**${nombre}**__](${url}) en <:spotify:1279145987574595685> **Spotify**!`,
+              files: [attachment],
+              embeds: [
+                new EmbedBuilder()
+                  .setAuthor({
+                    name: `${member.displayName} está escuchando Spotify`,
+                    iconURL: user.avatarURL({ extension: "png", size: 1024 }),
+                  })
+                  .setTitle(`${nombre}`)
+                  .setURL(url)
+                  .setThumbnail(img)
+                  .setImage(`attachment://${attachment.name}`)
+                  .addFields(
+                    {
+                      name: `<:members:1279140407720022148> Cantidad de Seguidores`,
+                      value: `${seguidores.toLocaleString()}`,
+                      inline: true,
+                    },
+                    {
+                      name: `🔊 Canción Actual`,
+                      value: `[${cancionActual}](${song.body.external_urls.spotify})`,
+                      inline: true,
+                    },
+                    {
+                      name: `🗣 Popularidad`,
+                      value: `${track.popularity}%`,
+                      inline: true,
+                    },
+                    {
+                      name: `💽 Géneros Realizados`,
+                      value: `${generos}`,
+                    },
+                    {
+                      name: `🎼 Canciones Populares`,
+                      value: `${cancionesPopulares}`,
+                    }
+                  )
+                  .setColor(color.hex),
+              ],
+            });
+          } catch (e) {
+            interaction.editReply({
+              content: `> <:warning:1279144320062066748> **No fue posible obtener información sobre este artista.**`,
+              ephemeral: true,
+            });
           }
         }
-      });
+      }
     } catch (e) {
       console.log(e);
       interaction.editReply({
-        content: `> <:warning:1198447554497618010> **¡Ocurrió un error al intentar ejecutar el comando!**`,
+        content: `> <:error:1279142677308248238> **¡Ocurrió un error al intentar ejecutar el comando!**`,
         ephemeral: true,
       });
     }
   },
 };
-
-function imgVertical(
-  presence,
-  songImage,
-  botAvatar,
-  spotifyLogo,
-  startTime,
-  duration,
-  playbackTime,
-  fillBar
-) {
-  const canvas = Canvas.createCanvas(858, 1713);
-  const context = canvas.getContext("2d");
-  const now = moment();
-
-  /* Fondo e Imagen */
-  context.filter = "blur(20px)";
-  context.drawImage(songImage, -400, 0, 1723, 1723);
-  context.filter = "blur(0px)";
-
-  const imageX = (canvas.width - 725) / 2;
-  const imageY = (canvas.height - 725) / 2;
-
-  context.drawImage(songImage, imageX, imageY - 40, 725, 725);
-  /* Fondo e Imagen */
-
-  /* Cuadro de Texto */
-  context.globalAlpha = 0.8;
-  const rectWidth = 770;
-  const rectHeight = 240;
-  const cornerRadius = 25;
-  const rectX = (canvas.width - rectWidth) / 2;
-  const rectY = imageY + 725 + 50 - 40;
-
-  context.beginPath();
-  context.moveTo(rectX + cornerRadius, rectY);
-  context.lineTo(rectX + rectWidth - cornerRadius, rectY);
-  context.arcTo(
-    rectX + rectWidth,
-    rectY,
-    rectX + rectWidth,
-    rectY + cornerRadius,
-    cornerRadius
-  );
-  context.lineTo(rectX + rectWidth, rectY + rectHeight - cornerRadius);
-  context.arcTo(
-    rectX + rectWidth,
-    rectY + rectHeight,
-    rectX + rectWidth - cornerRadius,
-    rectY + rectHeight,
-    cornerRadius
-  );
-  context.lineTo(rectX + cornerRadius, rectY + rectHeight);
-  context.arcTo(
-    rectX,
-    rectY + rectHeight,
-    rectX,
-    rectY + rectHeight - cornerRadius,
-    cornerRadius
-  );
-  context.lineTo(rectX, rectY + cornerRadius);
-  context.arcTo(rectX, rectY, rectX + cornerRadius, rectY, cornerRadius);
-  context.closePath();
-
-  context.fillStyle = "#3b3737";
-  context.fill();
-  context.globalAlpha = 0.7;
-  /* Cuadro de Texto */
-
-  context.shadowColor = "rgba(0, 0, 0, 5)";
-  context.shadowBlur = 20;
-
-  /* Nombre */
-  context.fillStyle = "#FFFFFF";
-  context.font = "42px Arial";
-  context.textAlign = "center";
-  context.fillText(presence.details, canvas.width / 2, rectY + 76);
-  /* Nombre */
-
-  /* Autor */
-  context.fillStyle = "#b0b0b0";
-  context.font = "35px Arial";
-  context.fillText(presence.state, canvas.width / 2, rectY + 126);
-  /* Autor */
-
-  context.shadowColor = "transparent";
-  context.shadowBlur = 0;
-
-  /* Progreso */
-  const progressX = (canvas.width - 546) / 2;
-  const progressY = rectY + 176;
-  const radio = 10;
-
-  context.fillStyle = "#34332F";
-  context.beginPath();
-  context.moveTo(progressX + radio, progressY);
-  context.lineTo(progressX + 546 - radio, progressY);
-  context.arc(
-    progressX + 546 - radio,
-    progressY + radio,
-    radio,
-    -Math.PI / 2,
-    0
-  );
-  context.lineTo(progressX + 546, progressY + 20 - radio);
-  context.arc(
-    progressX + 546 - radio,
-    progressY + 20 - radio,
-    radio,
-    0,
-    Math.PI / 2
-  );
-  context.lineTo(progressX + radio, progressY + 20);
-  context.arc(
-    progressX + radio,
-    progressY + 20 - radio,
-    radio,
-    Math.PI / 2,
-    Math.PI
-  );
-  context.lineTo(progressX, progressY + radio);
-  context.arc(
-    progressX + radio,
-    progressY + radio,
-    radio,
-    Math.PI,
-    -Math.PI / 2
-  );
-  context.closePath();
-  context.fill();
-
-  context.fillStyle = "#FFFFFF";
-  context.beginPath();
-  context.moveTo(progressX + radio, progressY);
-  context.lineTo(progressX + fillBar - radio, progressY);
-  context.arc(
-    progressX + fillBar - radio,
-    progressY + radio,
-    radio,
-    -Math.PI / 2,
-    0
-  );
-  context.lineTo(progressX + fillBar, progressY + 20 - radio);
-  context.arc(
-    progressX + fillBar - radio,
-    progressY + 20 - radio,
-    radio,
-    0,
-    Math.PI / 2
-  );
-  context.lineTo(progressX + radio, progressY + 20);
-  context.arc(
-    progressX + radio,
-    progressY + 20 - radio,
-    radio,
-    Math.PI / 2,
-    Math.PI
-  );
-  context.lineTo(progressX, progressY + radio);
-  context.arc(
-    progressX + radio,
-    progressY + radio,
-    radio,
-    Math.PI,
-    -Math.PI / 2
-  );
-  context.closePath();
-  context.fill();
-  /* Progreso */
-
-  context.shadowColor = "rgba(0, 0, 0, 5)";
-  context.shadowBlur = 20;
-
-  /* Duración */
-  context.font = "30px Arial";
-  const durationTextWidth = context.measureText(duration).width;
-  const playbackTimeTextWidth = context.measureText(playbackTime).width;
-  const durationX = progressX - durationTextWidth + 19;
-  const playbackTimeX = progressX + 601;
-  const durationY = progressY + 20;
-  context.fillText(playbackTime, durationX, durationY);
-  context.fillText(duration, playbackTimeX, durationY);
-  /* Duración */
-
-  /* Fecha y Hora */
-  context.font = "225px Arial";
-  context.fillText(now.format("hh:mm"), 430, 420 - 40);
-
-  context.font = "70px Arial";
-  context.fillText(now.locale("es").format("dddd Do, MMMM"), 430, 225 - 40);
-  /* Fecha y Hora */
-
-  /* Foto del Spotify logo */
-  const spotifyLogoWidth = 90;
-  const spotifyLogoHeight = 90;
-  const spotifyLogoX = canvas.width - 60 - spotifyLogoWidth;
-  const spotifyLogoY = canvas.height - 100 - spotifyLogoHeight / 2;
-  context.drawImage(
-    spotifyLogo,
-    spotifyLogoX,
-    spotifyLogoY,
-    spotifyLogoWidth,
-    spotifyLogoHeight
-  );
-  /* Foto del Spotify logo */
-
-  const avatarWidth = 90;
-  const avatarHeight = 90;
-  const avatarX = 60;
-  const avatarY = canvas.height - 100 - avatarHeight / 2;
-
-  /* Nombre de usuario del bot */
-  context.fillStyle = "#FFFFFF";
-  context.font = "40px Arial";
-  context.textAlign = "left";
-  const text = "Powered by Rub";
-  const textWidth = context.measureText(text).width;
-  const textX = (canvas.width - textWidth) / 2;
-  const textY = avatarY + avatarHeight / 2 + 20 / 2;
-  context.fillText(text, textX, textY);
-  /* Nombre de usuario del bot */
-
-  /* Foto de perfil del bot */
-  context.beginPath();
-  context.arc(
-    avatarX + avatarWidth / 2,
-    avatarY + avatarHeight / 2,
-    avatarWidth / 2,
-    0,
-    Math.PI * 2
-  );
-  context.closePath();
-  context.clip();
-  context.drawImage(botAvatar, avatarX, avatarY, avatarWidth, avatarHeight);
-  /* Foto de perfil del bot */
-
-  const file = new AttachmentBuilder(canvas.toBuffer("image/png"), {
-    name: "spotify.png",
-  });
-
-  return file;
-}
-
-function imgHorizontal(
-  canvas,
-  context,
-  presence,
-  songImage,
-  startTime,
-  duration,
-  playbackTime,
-  fillBar
-) {}
-
-async function imgLyrics(presence, songImage, botAvatar, spotifyLogo, lyrics) {
-  const canvas = Canvas.createCanvas(858, 1713);
-  const context = canvas.getContext("2d");
-
-  const color = await getAverageColor(songImage);
-
-  /* Fondo e Imagen */
-  context.filter = "blur(20px)";
-  context.fillStyle = color.hex;
-  context.fillRect(-400, 0, 1723, 1723);
-  context.filter = "blur(0px)";
-
-  const imageX = (canvas.width - 725) / 2;
-  const imageY = (canvas.height - 725) / 2;
-
-  context.drawImage(songImage, imageX, imageY - 40, 725, 725);
-  /* Fondo e Imagen */
-
-  /* Cuadro de Texto */
-  context.globalAlpha = 0.8;
-  const rectWidth = 770;
-  const rectHeight = 240;
-  const cornerRadius = 25;
-  const rectX = (canvas.width - rectWidth) / 2;
-  const rectY = imageY + 725 + 50 - 40;
-
-  context.beginPath();
-  context.moveTo(rectX + cornerRadius, rectY);
-  context.lineTo(rectX + rectWidth - cornerRadius, rectY);
-  context.arcTo(
-    rectX + rectWidth,
-    rectY,
-    rectX + rectWidth,
-    rectY + cornerRadius,
-    cornerRadius
-  );
-  context.lineTo(rectX + rectWidth, rectY + rectHeight - cornerRadius);
-  context.arcTo(
-    rectX + rectWidth,
-    rectY + rectHeight,
-    rectX + rectWidth - cornerRadius,
-    rectY + rectHeight,
-    cornerRadius
-  );
-  context.lineTo(rectX + cornerRadius, rectY + rectHeight);
-  context.arcTo(
-    rectX,
-    rectY + rectHeight,
-    rectX,
-    rectY + rectHeight - cornerRadius,
-    cornerRadius
-  );
-  context.lineTo(rectX, rectY + cornerRadius);
-  context.arcTo(rectX, rectY, rectX + cornerRadius, rectY, cornerRadius);
-  context.closePath();
-
-  context.fillStyle = "#3b3737";
-  context.fill();
-  context.globalAlpha = 0.7;
-  /* Cuadro de Texto */
-
-  context.shadowColor = "rgba(0, 0, 0, 5)";
-  context.shadowBlur = 20;
-
-  /* Nombre */
-  context.fillStyle = "#FFFFFF";
-  context.font = "42px Arial";
-  context.textAlign = "center";
-  context.fillText(presence.details, canvas.width / 2, rectY + 76);
-  /* Nombre */
-
-  /* Autor */
-  context.fillStyle = "#b0b0b0";
-  context.font = "35px Arial";
-  context.fillText(presence.state, canvas.width / 2, rectY + 126);
-  /* Autor */
-
-  context.shadowColor = "transparent";
-  context.shadowBlur = 0;
-
-  context.shadowColor = "rgba(0, 0, 0, 5)";
-  context.shadowBlur = 20;
-
-  /* Foto del Spotify logo */
-  const spotifyLogoWidth = 90;
-  const spotifyLogoHeight = 90;
-  const spotifyLogoX = canvas.width - 60 - spotifyLogoWidth;
-  const spotifyLogoY = canvas.height - 100 - spotifyLogoHeight / 2;
-  context.drawImage(
-    spotifyLogo,
-    spotifyLogoX,
-    spotifyLogoY,
-    spotifyLogoWidth,
-    spotifyLogoHeight
-  );
-  /* Foto del Spotify logo */
-
-  const avatarWidth = 90;
-  const avatarHeight = 90;
-  const avatarX = 60;
-  const avatarY = canvas.height - 100 - avatarHeight / 2;
-
-  /* Nombre de usuario del bot */
-  context.fillStyle = "#FFFFFF";
-  context.font = "40px Arial";
-  context.textAlign = "left";
-  const text = "Powered by Rub";
-  const textWidth = context.measureText(text).width;
-  const textX = (canvas.width - textWidth) / 2;
-  const textY = avatarY + avatarHeight / 2 + 20 / 2;
-  context.fillText(text, textX, textY);
-  /* Nombre de usuario del bot */
-
-  /* Foto de perfil del bot */
-  context.beginPath();
-  context.arc(
-    avatarX + avatarWidth / 2,
-    avatarY + avatarHeight / 2,
-    avatarWidth / 2,
-    0,
-    Math.PI * 2
-  );
-  context.closePath();
-  context.clip();
-  context.drawImage(botAvatar, avatarX, avatarY, avatarWidth, avatarHeight);
-  /* Foto de perfil del bot */
-
-  const file = new AttachmentBuilder(canvas.toBuffer("image/png"), {
-    name: "spotify.png",
-  });
-
-  return file;
-}

@@ -45,7 +45,7 @@ module.exports = (client) => {
       for (const ticket of ticketData) {
         if (guild.channels.cache.get(ticket.channel))
           return interaction.reply({
-            content: `> <:ticket:1201715618374488094> **Ya tienes un ticket creado en <#${ticket.channel}>.**`,
+            content: `> <:ticket:1279136231908966472> **Ya tienes un ticket creado en <#${ticket.channel}>.**`,
             ephemeral: true,
           });
       }
@@ -54,7 +54,7 @@ module.exports = (client) => {
 
       /* Crear Tickets */
       await interaction.reply({
-        content: `> <:time:1198844708655485048> **Espera un momento mientras tu ticket es configurado...**`,
+        content: `> <:time:1279138439417303161> **Espera un momento mientras tu ticket es configurado...**`,
         ephemeral: true,
       });
       const canal = await guild.channels.create({
@@ -78,10 +78,10 @@ module.exports = (client) => {
               iconURL: user.avatarURL({ format: "png" }),
             })
             .setTitle(
-              `<:admin:1198448382717476934> El personal del servidor te ayudará muy pronto`
+              `<:administrator:1279139833176129577> El personal del servidor te ayudará muy pronto`
             )
             .setDescription(
-              `Empieza explicando tu problema para facilitar el proceso.\nUtiliza **__<:locked:1199113550757646527>__** para cerrar el ticket.`
+              `Empieza explicando tu problema para facilitar el proceso.\nUtiliza **__<:locked:1279136440931844136>__** para cerrar el ticket.`
             )
             .setFooter({
               text: `Powered by manucatun`,
@@ -114,13 +114,13 @@ module.exports = (client) => {
       });
 
       await interaction.editReply({
-        content: `> <:ticket:1201715618374488094> **Tu ticket se ha creado correctamente en <#${canal.id}>**.`,
+        content: `> <:ticket:1279136231908966472> **Tu ticket se ha creado correctamente en <#${canal.id}>**.`,
         ephemeral: true,
       });
       /* Crear Tickets */
     } catch (e) {
       await interaction.reply({
-        content: `> <:warning:1198447554497618010>** ¡Ocurrió un error al intentar ejecutar el comando!**`,
+        content: `> <:error:1279142677308248238> **¡Ocurrió un error al intentar ejecutar el comando!**`,
         ephemeral: true,
       });
       console.log(e);
@@ -152,13 +152,13 @@ module.exports = (client) => {
           {
             if (ticketData && ticketData.closed)
               return interaction.reply({
-                content: `> <:locked:1199113550757646527> **El ticket ya está cerrado.**`,
+                content: `> <:locked:1279136440931844136> **El ticket ya está cerrado.**`,
                 ephemeral: true,
               });
             await interaction.deferUpdate();
 
             const verificar = await channel.send({
-              content: `> <:wrench:1198447792507592814> **¿Quieres cerrar el ticket?**`,
+              content: `> <:wrench:1279141503914086512> **¿Quieres cerrar el ticket?**`,
               components: [
                 new ActionRowBuilder().addComponents(
                   new ButtonBuilder()
@@ -189,7 +189,7 @@ module.exports = (client) => {
                       name: button.member.displayName,
                       iconURL: button.user.avatarURL({ extension: "png", size: 1024 }),
                     })
-                    .setTitle(`<:locked:1199113550757646527> Ticket Cerrado`)
+                    .setTitle(`<:locked:1279136440931844136> Ticket Cerrado`)
                     .setDescription(
                       `Cerrado el <t:${Math.round(
                         Date.now() / 1000
@@ -205,7 +205,7 @@ module.exports = (client) => {
                 components: [
                   new ActionRowBuilder().addComponents([
                     new ButtonBuilder()
-                      .setEmoji("1199113566255595733")
+                      .setEmoji("1279136329694707732")
                       .setStyle("Success")
                       .setCustomId("abrirTicket"),
                     new ButtonBuilder()
@@ -213,7 +213,7 @@ module.exports = (client) => {
                       .setStyle("Danger")
                       .setCustomId("borrarTicket"),
                     new ButtonBuilder()
-                      .setEmoji("1198447843317403728")
+                      .setEmoji("1279141342399823984")
                       .setStyle("Primary")
                       .setCustomId("guardarTicket"),
                   ]),
@@ -235,7 +235,7 @@ module.exports = (client) => {
                   components: [
                     new ActionRowBuilder().addComponents(
                       new ButtonBuilder()
-                        .setEmoji("1198446963406946314")
+                        .setEmoji("1279140461503578224")
                         .setStyle("Danger")
                         .setCustomId("verificar")
                         .setDisabled(true)
@@ -257,23 +257,23 @@ module.exports = (client) => {
               )
             )
               return interaction.reply({
-                content: `> <:no:1198446838819328050> **No tienes permisos para utilizar este botón.**`,
+                content: `> <:cross:1279140540901888060> **No tienes permisos para utilizar este botón.**`,
                 ephemeral: true,
               });
 
             if (ticketData && !ticketData.closed)
               return interaction.reply({
-                content: `> <:unlocked:1199113566255595733> **El ticket ya está abierto.**`,
+                content: `> <:unlocked:1279136329694707732> **El ticket ya está abierto.**`,
                 ephemeral: true,
               });
             await interaction.deferUpdate();
 
             const verificar = await channel.send({
-              content: `> <:wrench:1198447792507592814> **¿Quieres abrir el ticket?**`,
+              content: `> <:wrench:1279141503914086512> **¿Quieres abrir el ticket?**`,
               components: [
                 new ActionRowBuilder().addComponents(
                   new ButtonBuilder()
-                    .setEmoji("1199113566255595733")
+                    .setEmoji("1279136329694707732")
                     .setStyle("Success")
                     .setCustomId("verificar")
                 ),
@@ -304,7 +304,7 @@ module.exports = (client) => {
                       name: button.member.displayName,
                       iconURL: button.user.avatarURL({ extension: "png", size: 1024 }),
                     })
-                    .setTitle(`<:unlocked:1199113566255595733> Ticket Abierto`)
+                    .setTitle(`<:unlocked:1279136329694707732> Ticket Abierto`)
                     .setDescription(
                       `Abierto el <t:${Math.round(
                         Date.now() / 1000
@@ -339,7 +339,7 @@ module.exports = (client) => {
                   components: [
                     new ActionRowBuilder().addComponents(
                       new ButtonBuilder()
-                        .setEmoji("1199113566255595733")
+                        .setEmoji("1279136329694707732")
                         .setStyle("Success")
                         .setCustomId("verificar")
                         .setDisabled(true)
@@ -361,19 +361,19 @@ module.exports = (client) => {
               )
             )
               return interaction.reply({
-                content: `> <:no:1198446838819328050> **No tienes permisos para utilizar este botón.**`,
+                content: `> <:cross:1279140540901888060> **No tienes permisos para utilizar este botón.**`,
                 ephemeral: true,
               });
 
             if (ticketData && !ticketData.closed)
               return interaction.reply({
-                content: `> <:error:1198447011448508466> **El ticket debe estar cerrado para poder eliminarlo.**`,
+                content: `> <:warning:1279144320062066748> **El ticket debe estar cerrado para poder eliminarlo.**`,
                 ephemeral: true,
               });
             await interaction.deferUpdate();
 
             const verificar = await channel.send({
-              content: `> <:wrench:1198447792507592814> **¿Quieres eliminar el ticket?**`,
+              content: `> <:wrench:1279141503914086512> **¿Quieres eliminar el ticket?**`,
               components: [
                 new ActionRowBuilder().addComponents(
                   new ButtonBuilder()
@@ -408,7 +408,7 @@ module.exports = (client) => {
                       name: button.member.displayName,
                       iconURL: button.user.avatarURL({ extension: "png", size: 1024 }),
                     })
-                    .setTitle(`<:delete:1198448669842739381> Ticket Eliminado`)
+                    .setTitle(`<:delete:1279138661216157778> Ticket Eliminado`)
                     .setDescription(
                       `Se eliminará en \`3 segundos\`...\nEliminado el <t:${Math.round(
                         Date.now() / 1000
@@ -436,7 +436,7 @@ module.exports = (client) => {
                   components: [
                     new ActionRowBuilder().addComponents(
                       new ButtonBuilder()
-                        .setEmoji("1199113566255595733")
+                        .setEmoji("1279136329694707732")
                         .setStyle("Danger")
                         .setCustomId("verificar")
                         .setDisabled(true)
@@ -458,12 +458,12 @@ module.exports = (client) => {
               )
             )
               return interaction.reply({
-                content: `> <:no:1198446838819328050> **No tienes permisos para utilizar este botón.**`,
+                content: `> <:cross:1279140540901888060> **No tienes permisos para utilizar este botón.**`,
                 ephemeral: true,
               });
 
             await interaction.reply({
-              content: `> <:time:1198844708655485048> **Guardando el ticket...**`,
+              content: `> <:time:1279138439417303161> **Guardando el ticket...**`,
               ephemeral: true,
             });
 
@@ -480,7 +480,7 @@ module.exports = (client) => {
                     name: member.displayName,
                     iconURL: user.avatarURL({ extension: "png", size: 1024 }),
                   })
-                  .setTitle(`<:guidelines:1198447843317403728> Ticket Guardado`)
+                  .setTitle(`<:guidelines:1279141342399823984> Ticket Guardado`)
                   .setDescription(
                     `Guardado el <t:${Math.round(
                       Date.now() / 1000
@@ -502,7 +502,7 @@ module.exports = (client) => {
     } catch (e) {
       console.log(e);
       await interaction.reply({
-        content: `> <:warning:1198447554497618010>** ¡Ocurrió un error al intentar ejecutar el comando!**`,
+        content: `> <:error:1279142677308248238> **¡Ocurrió un error al intentar ejecutar el comando!**`,
         ephemeral: true,
       });
     }

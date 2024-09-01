@@ -25,7 +25,7 @@ module.exports = {
       });
       if (!data || data.warnings.length === 0) {
         return interaction.reply({
-          content: `> <:newmember:1198448064881512450> **El usuario no tiene ninguna advertencia en el servidor.**`,
+          content: `> <:verifiedmember:1279139097000284241> **El usuario no tiene ninguna advertencia en el servidor.**`,
           ephemeral: true,
         });
       }
@@ -43,13 +43,13 @@ module.exports = {
         client,
         interaction,
         texto,
-        `<:shield:1198447657761390622> \`[${data.warnings.length}]\` Advertencias de ${miembro.displayName}`,
+        `<:shield:1279141839605334168> \`[${data.warnings.length}]\` Advertencias de ${miembro.displayName}`,
         1
       );
     } catch (e) {
       console.log(e);
       interaction.reply({
-        content: `> <:error:1198447011448508466> **¡Ocurrió un error al intentar ejecutar el comando!**`,
+        content: `> <:error:1279142677308248238> **¡Ocurrió un error al intentar ejecutar el comando!**`,
         ephemeral: true,
       });
     }

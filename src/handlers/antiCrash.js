@@ -15,7 +15,7 @@ module.exports = (client) => {
       content: `<@&995485990049300490>`,
       embeds: [
         embed
-          .setTitle(`<:error:1198447011448508466> ERROR - DISCORD API`)
+          .setTitle(`<:warning:1279144320062066748> ERROR - DISCORD API`)
           .setURL(`https://discordjs.guide/popular-topics/errors.html#errors`)
           .setDescription(
             `\`\`\`js\n${inspect(err, { depth: 0 }).slice(0, 1000)}\`\`\``
@@ -33,7 +33,7 @@ module.exports = (client) => {
       content: `<@&995485990049300490>`,
       embeds: [
         embed
-          .setTitle(`<:error:1198447011448508466> ERROR - UNHANDLED REJECTION`)
+          .setTitle(`<:warning:1279144320062066748> ERROR - UNHANDLED REJECTION`)
           .setURL(
             `https://nodejs.org/dist/latest-v20.x/docs/api/process.html#event-unhandledrejection`
           )
@@ -66,7 +66,7 @@ module.exports = (client) => {
       content: `<@&995485990049300490>`,
       embeds: [
         embed
-          .setTitle(`<:error:1198447011448508466> ERROR - UNCAUGHT EXCEPTION`)
+          .setTitle(`<:warning:1279144320062066748> ERROR - UNCAUGHT EXCEPTION`)
           .setURL(
             `https://nodejs.org/dist/latest-v20.x/docs/api/process.html#event-uncaughtexception`
           )
@@ -100,7 +100,7 @@ module.exports = (client) => {
       embeds: [
         embed
           .setTitle(
-            `<:error:1198447011448508466> ERROR - UNCAUGHT EXCEPTION MONITOR`
+            `<:warning:1279144320062066748> ERROR - UNCAUGHT EXCEPTION MONITOR`
           )
           .setURL(
             `https://nodejs.org/dist/latest-v20.x/docs/api/process.html#event-uncaughtexceptionmonitor`

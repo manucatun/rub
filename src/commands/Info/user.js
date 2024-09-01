@@ -67,7 +67,7 @@ module.exports = {
             /* Comprobaciones */
             if (!usuario.avatarURL()) {
               return interaction.reply({
-                content: `> <:error:1198447011448508466> **Este usuario no tiene un banner.**`,
+                content: `> <:warning:1279144320062066748> **Este usuario no tiene un banner.**`,
                 ephemeral: true,
               });
             }
@@ -124,7 +124,7 @@ module.exports = {
             /* Comprobaciones */
             if (!usuario.bannerURL()) {
               return interaction.reply({
-                content: `> <:error:1198447011448508466> **Este usuario no tiene un banner.**`,
+                content: `> <:warning:1279144320062066748> **Este usuario no tiene un banner.**`,
                 ephemeral: true,
               });
             }
@@ -203,7 +203,7 @@ module.exports = {
                       name: `Información General`,
                       value: [
                         `📋 • **ID:** \`${usuario.id}\``,
-                        `<:member:1198448289922678915> • **Usuario:** ${usuario.username}`,
+                        `<:member:1279140359938768989> • **Usuario:** ${usuario.username}`,
                         `🌍 • **Nombre:** ${
                           usuario.globalName
                             ? usuario.globalName
@@ -213,7 +213,7 @@ module.exports = {
                         `📅 • **Creación:** <t:${parseInt(
                           usuario.createdTimestamp / 1000
                         )}:R>`,
-                        `<:boost:1198448219957502093> • **Boost:** ${
+                        `<:booster:1279140811480760410> • **Boost:** ${
                           miembro.premiumSince ? "Si" : "No"
                         }`,
                       ].join("\n"),
@@ -269,7 +269,7 @@ module.exports = {
     } catch (e) {
       console.log(e);
       interaction.reply({
-        content: `> <:warning:1198447554497618010> **¡Ocurrió un error al intentar ejecutar el comando!**`,
+        content: `> <:error:1279142677308248238> **¡Ocurrió un error al intentar ejecutar el comando!**`,
         ephemeral: true,
       });
     }

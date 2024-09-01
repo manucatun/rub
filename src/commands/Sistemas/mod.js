@@ -185,7 +185,7 @@ module.exports = {
               /* Comprobaciones */
               if (!miembro.bannable)
                 return interaction.reply({
-                  content: `> <:error:1198447011448508466> **No puedo prohibir a este usuario.**`,
+                  content: `> <:warning:1279144320062066748> **No puedo prohibir a este usuario.**`,
                   ephemeral: true,
                 });
               if (
@@ -193,14 +193,14 @@ module.exports = {
                 miembro.roles.highest.position
               )
                 return interaction.reply({
-                  content: `> <:error:1198447011448508466> **No puedo prohibir a este usuario, mi rol está por debajo.**`,
+                  content: `> <:warning:1279144320062066748> **No puedo prohibir a este usuario, mi rol está por debajo.**`,
                   ephemeral: true,
                 });
               if (
                 member?.roles.highest.position <= miembro.roles.highest.position
               )
                 return interaction.reply({
-                  content: `> <:error:1198447011448508466> **No puedes prohibir a este usuario, tu rol está por debajo.**`,
+                  content: `> <:warning:1279144320062066748> **No puedes prohibir a este usuario, tu rol está por debajo.**`,
                   ephemeral: true,
                 });
               /* Comprobaciones */
@@ -217,7 +217,7 @@ module.exports = {
                         }),
                       })
                       .setTitle(
-                        `<:leave:1198447238888816681> Has sido prohibido de __${guild.name}__`
+                        `<:leave:1279144038922063892> Has sido prohibido de __${guild.name}__`
                       )
                       .addFields(
                         {
@@ -239,7 +239,7 @@ module.exports = {
                 })
                 .catch(() => {
                   interaction.channel.send({
-                    content: `> <:error:1198447011448508466> **¡No he podido enviarle el mensaje al usuario!**`,
+                    content: `> <:warning:1279144320062066748> **¡No he podido enviarle el mensaje al usuario!**`,
                   });
                 });
 
@@ -255,7 +255,7 @@ module.exports = {
                         }),
                       })
                       .setTitle(
-                        `<:shield:1198447657761390622> Usuario prohibido`
+                        `<:shield:1279141839605334168> Usuario prohibido`
                       )
                       .setThumbnail(
                         usuario.avatarURL({ extension: "png", size: 1024 })
@@ -282,7 +282,7 @@ module.exports = {
             } catch (e) {
               console.log(e);
               return interaction.reply({
-                content: `> <:error:1198447011448508466> **¡No he podido prohibir al usuario!**`,
+                content: `> <:warning:1279144320062066748> **¡No he podido prohibir al usuario!**`,
                 ephemeral: true,
               });
             }
@@ -297,7 +297,7 @@ module.exports = {
 
             try {
               await interaction.reply({
-                content: `> <:time:1198844708655485048> **Eliminando los mensajes...**`,
+                content: `> <:time:1279138439417303161> **Eliminando los mensajes...**`,
                 ephemeral: true,
               });
 
@@ -316,7 +316,7 @@ module.exports = {
 
                 if (i === 0)
                   return interaction.editReply({
-                    content: `> <:error:1198447011448508466> **__${usuario.displayName}__ no tiene mensajes en ${canal}.**`,
+                    content: `> <:warning:1279144320062066748> **__${usuario.displayName}__ no tiene mensajes en ${canal}.**`,
                     ephemeral: true,
                   });
 
@@ -324,26 +324,26 @@ module.exports = {
                   .bulkDelete(msgDelete, true)
                   .then(async (message) => {
                     await canal.send({
-                      content: `> <:delete:1198448669842739381> **\`${message.size}\` mensajes del usuario __${usuario.displayName}__ fueron eliminados.**`,
+                      content: `> <:delete:1279138661216157778> **\`${message.size}\` mensajes del usuario __${usuario.displayName}__ fueron eliminados.**`,
                     });
                     await interaction.editReply({
-                      content: `> <:delete:1198448669842739381> **¡Los mensajes fueron eliminados correctamente!**`,
+                      content: `> <:delete:1279138661216157778> **¡Los mensajes fueron eliminados correctamente!**`,
                     });
                   });
               } else {
                 await canal.bulkDelete(cantidad, true).then(async (message) => {
                   await canal.send({
-                    content: `> <:delete:1198448669842739381> **\`${message.size}\` mensajes fueron eliminados.**`,
+                    content: `> <:delete:1279138661216157778> **\`${message.size}\` mensajes fueron eliminados.**`,
                   });
                   await interaction.editReply({
-                    content: `> <:delete:1198448669842739381> **¡Los mensajes fueron eliminados correctamente!**`,
+                    content: `> <:delete:1279138661216157778> **¡Los mensajes fueron eliminados correctamente!**`,
                   });
                 });
               }
             } catch (e) {
               console.log(e);
               return interaction.reply({
-                content: `> <:error:1198447011448508466> **¡No he podido eliminar los mensajes, pasaron más de 14 días desde que fueron enviados!**`,
+                content: `> <:warning:1279144320062066748> **¡No he podido eliminar los mensajes, pasaron más de 14 días desde que fueron enviados!**`,
                 ephemeral: true,
               });
             }
@@ -360,7 +360,7 @@ module.exports = {
               /* Comprobaciones */
               if (!miembro.kickable)
                 return interaction.reply({
-                  content: `> <:error:1198447011448508466> **No puedo expulsar a este usuario.**`,
+                  content: `> <:warning:1279144320062066748> **No puedo expulsar a este usuario.**`,
                   ephemeral: true,
                 });
               if (
@@ -368,14 +368,14 @@ module.exports = {
                 miembro.roles.highest.position
               )
                 return interaction.reply({
-                  content: `> <:error:1198447011448508466> **No puedo expulsar a este usuario, mi rol está por debajo.**`,
+                  content: `> <:warning:1279144320062066748> **No puedo expulsar a este usuario, mi rol está por debajo.**`,
                   ephemeral: true,
                 });
               if (
                 member?.roles.highest.position <= miembro.roles.highest.position
               )
                 return interaction.reply({
-                  content: `> <:error:1198447011448508466> **No puedes expulsar a este usuario, tu rol está por debajo.**`,
+                  content: `> <:warning:1279144320062066748> **No puedes expulsar a este usuario, tu rol está por debajo.**`,
                   ephemeral: true,
                 });
               /* Comprobaciones */
@@ -392,7 +392,7 @@ module.exports = {
                         }),
                       })
                       .setTitle(
-                        `<:leave:1198447238888816681> Has sido expulsado de __${guild.name}__`
+                        `<:leave:1279144038922063892> Has sido expulsado de __${guild.name}__`
                       )
                       .addFields(
                         {
@@ -414,7 +414,7 @@ module.exports = {
                 })
                 .catch(() => {
                   interaction.channel.send({
-                    content: `> <:error:1198447011448508466> **¡No he podido enviarle el mensaje al usuario!**`,
+                    content: `> <:warning:1279144320062066748> **¡No he podido enviarle el mensaje al usuario!**`,
                   });
                 });
 
@@ -430,7 +430,7 @@ module.exports = {
                         }),
                       })
                       .setTitle(
-                        `<:shield:1198447657761390622> Usuario expulsado`
+                        `<:shield:1279141839605334168> Usuario expulsado`
                       )
                       .setThumbnail(
                         usuario.avatarURL({ extension: "png", size: 1024 })
@@ -457,7 +457,7 @@ module.exports = {
             } catch (e) {
               console.log(e);
               return interaction.reply({
-                content: `> <:error:1198447011448508466> **¡No he podido expulsar al usuario!**`,
+                content: `> <:warning:1279144320062066748> **¡No he podido expulsar al usuario!**`,
                 ephemeral: true,
               });
             }
@@ -478,7 +478,7 @@ module.exports = {
                 canal.type !== ChannelType.GuildAnnouncement
               )
                 return interaction.reply({
-                  content: `> <:error:1198447011448508466> **No es un canal válido.**`,
+                  content: `> <:warning:1279144320062066748> **No es un canal válido.**`,
                   ephemeral: true,
                 });
 
@@ -504,7 +504,7 @@ module.exports = {
                 )
               ) {
                 return interaction.reply({
-                  content: `> <:locked:1199113550757646527> **${canal} ya se encuentra bloqueado.**`,
+                  content: `> <:locked:1279136440931844136> **${canal} ya se encuentra bloqueado.**`,
                   ephemeral: true,
                 });
               }
@@ -520,7 +520,7 @@ module.exports = {
                         size: 1024,
                       }),
                     })
-                    .setTitle(`<:locked:1199113550757646527> Canal bloqueado`)
+                    .setTitle(`<:locked:1279136440931844136> Canal bloqueado`)
                     .addFields({
                       name: `Motivo`,
                       value: `\`\`\`yml\n${motivo}\`\`\``,
@@ -535,13 +535,13 @@ module.exports = {
               });
 
               await interaction.reply({
-                content: `> <:locked:1199113550757646527> **Se bloqueó el canal ${canal}.**\nLos usuarios no podrán enviar mensajes.`,
+                content: `> <:locked:1279136440931844136> **Se bloqueó el canal ${canal}.**\nLos usuarios no podrán enviar mensajes.`,
                 ephemeral: true,
               });
             } catch (e) {
               console.log(e);
               return interaction.reply({
-                content: `> <:error:1198447011448508466> **¡No he podido bloquear el canal de texto!**`,
+                content: `> <:warning:1279144320062066748> **¡No he podido bloquear el canal de texto!**`,
                 ephemeral: true,
               });
             }
@@ -566,7 +566,7 @@ module.exports = {
                 tiempoMs % 1 != 0
               )
                 return interaction.reply({
-                  content: `> <:error:1198447011448508466> **No es una duración válida, menor a 28 días.**`,
+                  content: `> <:warning:1279144320062066748> **No es una duración válida, menor a 28 días.**`,
                   ephemeral: true,
                 });
               /* Duración */
@@ -574,7 +574,7 @@ module.exports = {
               /* Comprobaciones */
               if (!miembro.moderatable)
                 return interaction.reply({
-                  content: `> <:error:1198447011448508466> **No puedo aislar a este usuario.**`,
+                  content: `> <:warning:1279144320062066748> **No puedo aislar a este usuario.**`,
                   ephemeral: true,
                 });
               if (
@@ -582,14 +582,14 @@ module.exports = {
                 miembro.roles.highest.position
               )
                 return interaction.reply({
-                  content: `> <:error:1198447011448508466> **No puedo aislar a este usuario, mi rol está por debajo.**`,
+                  content: `> <:warning:1279144320062066748> **No puedo aislar a este usuario, mi rol está por debajo.**`,
                   ephemeral: true,
                 });
               if (
                 member?.roles.highest.position <= miembro.roles.highest.position
               )
                 return interaction.reply({
-                  content: `> <:error:1198447011448508466> **No puedes aislar a este usuario, tu rol está por debajo.**`,
+                  content: `> <:warning:1279144320062066748> **No puedes aislar a este usuario, tu rol está por debajo.**`,
                   ephemeral: true,
                 });
               /* Comprobaciones */
@@ -609,7 +609,7 @@ module.exports = {
                             }),
                           })
                           .setTitle(
-                            `<:timeout:1198779634494492824> Has sido aislado temporalmente en __${guild.name}__`
+                            `<:timeout:1279138560498471015> Has sido aislado temporalmente en __${guild.name}__`
                           )
                           .addFields(
                             {
@@ -641,7 +641,7 @@ module.exports = {
                     })
                     .catch(() => {
                       interaction.channel.send({
-                        content: `> <:error:1198447011448508466> **¡No he podido enviarle el mensaje al usuario!**`,
+                        content: `> <:warning:1279144320062066748> **¡No he podido enviarle el mensaje al usuario!**`,
                       });
                     });
 
@@ -656,7 +656,7 @@ module.exports = {
                           }),
                         })
                         .setTitle(
-                          `<:timeout:1198779634494492824> Usuario aislado`
+                          `<:timeout:1279138560498471015> Usuario aislado`
                         )
                         .setThumbnail(
                           usuario.avatarURL({ extension: "png", size: 1024 })
@@ -693,7 +693,7 @@ module.exports = {
             } catch (e) {
               console.log(e);
               return interaction.reply({
-                content: `> <:error:1198447011448508466> **¡No he podido aislar al usuario!**`,
+                content: `> <:warning:1279144320062066748> **¡No he podido aislar al usuario!**`,
                 ephemeral: true,
               });
             }
@@ -710,11 +710,11 @@ module.exports = {
               if (!duración || duración <= 0 || isNaN(duración)) {
                 await canal.setRateLimitPerUser(0).then(async () => {
                   await canal.send({
-                    content: `> <:time:1198844708655485048> **¡Modo pausado deshabilitado!**\nLos usuarios podrán enviar mensajes sin restricciones de velocidad.`,
+                    content: `> <:time:1279138439417303161> **¡Modo pausado deshabilitado!**\nLos usuarios podrán enviar mensajes sin restricciones de velocidad.`,
                   });
 
                   await interaction.reply({
-                    content: `> <:time:1198844708655485048> **Se deshabilitó el modo pausado en ${canal}.**`,
+                    content: `> <:time:1279138439417303161> **Se deshabilitó el modo pausado en ${canal}.**`,
                     ephemeral: true,
                   });
                   return;
@@ -726,18 +726,18 @@ module.exports = {
 
               await canal.setRateLimitPerUser(duración).then(async () => {
                 await canal.send({
-                  content: `> <:time:1198844708655485048> **¡Modo pausado habilitado!**\nLos usuarios solo podrán enviar mensajes cada \`${duración} segundos\`.`,
+                  content: `> <:time:1279138439417303161> **¡Modo pausado habilitado!**\nLos usuarios solo podrán enviar mensajes cada \`${duración} segundos\`.`,
                 });
 
                 await interaction.reply({
-                  content: `> <:time:1198844708655485048> **Se habilitó el modo pausado en ${canal}.**\nLos usuarios solo podrán enviar mensajes cada \`${duración} segundos\`.`,
+                  content: `> <:time:1279138439417303161> **Se habilitó el modo pausado en ${canal}.**\nLos usuarios solo podrán enviar mensajes cada \`${duración} segundos\`.`,
                   ephemeral: true,
                 });
               });
             } catch (e) {
               console.log(e);
               return interaction.reply({
-                content: `> <:error:1198447011448508466> **¡No he podido cambiar la duración del modo pausado!**`,
+                content: `> <:warning:1279144320062066748> **¡No he podido cambiar la duración del modo pausado!**`,
                 ephemeral: true,
               });
             }
@@ -753,7 +753,7 @@ module.exports = {
               await guild.bans.fetch().then(async (bans) => {
                 if (bans.size === 0)
                   return interaction.reply({
-                    content: `> <:newmember:1198448064881512450> **No hay usuarios prohibidos en el servidor.**`,
+                    content: `> <:verifiedmember:1279139097000284241> **No hay usuarios prohibidos en el servidor.**`,
                     ephemeral: true,
                   });
                 const miembro = bans.find(
@@ -761,7 +761,7 @@ module.exports = {
                 );
                 if (!miembro)
                   return interaction.reply({
-                    content: `> <:newmember:1198448064881512450> **Este usuario no está prohibido en el servidor.**`,
+                    content: `> <:verifiedmember:1279139097000284241> **Este usuario no está prohibido en el servidor.**`,
                     ephemeral: true,
                   });
                 /* Buscar Usuario */
@@ -778,7 +778,7 @@ module.exports = {
                           }),
                         })
                         .setTitle(
-                          `<:newmember:1198448064881512450> Prohibición removida`
+                          `<:verifiedmember:1279139097000284241> Prohibición removida`
                         )
                         .addFields({
                           name: `Usuario`,
@@ -817,7 +817,7 @@ module.exports = {
                 canal.type !== ChannelType.GuildAnnouncement
               )
                 return interaction.reply({
-                  content: `> <:error:1198447011448508466> **No es un canal válido.**`,
+                  content: `> <:warning:1279144320062066748> **No es un canal válido.**`,
                   ephemeral: true,
                 });
 
@@ -843,7 +843,7 @@ module.exports = {
                 )
               ) {
                 return interaction.reply({
-                  content: `> <:unlocked:1199113566255595733> **${canal} ya se encuentra desbloqueado.**`,
+                  content: `> <:unlocked:1279136329694707732> **${canal} ya se encuentra desbloqueado.**`,
                   ephemeral: true,
                 });
               }
@@ -860,7 +860,7 @@ module.exports = {
                       }),
                     })
                     .setTitle(
-                      `<:unlocked:1199113566255595733> Canal desbloqueado`
+                      `<:unlocked:1279136329694707732> Canal desbloqueado`
                     )
                     .setFooter({
                       text: `Powered by manucatun`,
@@ -872,13 +872,13 @@ module.exports = {
               });
 
               await interaction.reply({
-                content: `> <:unlocked:1199113566255595733> **Se desbloqueo el canal ${canal}.**\nLos usuarios podrán volver a enviar mensajes.`,
+                content: `> <:unlocked:1279136329694707732> **Se desbloqueo el canal ${canal}.**\nLos usuarios podrán volver a enviar mensajes.`,
                 ephemeral: true,
               });
             } catch (e) {
               console.log(e);
               return interaction.reply({
-                content: `> <:error:1198447011448508466> **¡No he podido desbloquear el canal de texto!**`,
+                content: `> <:warning:1279144320062066748> **¡No he podido desbloquear el canal de texto!**`,
                 ephemeral: true,
               });
             }
@@ -894,13 +894,13 @@ module.exports = {
               /* Comprobaciones */
               if (!miembro.isCommunicationDisabled())
                 return interaction.reply({
-                  content: `> <:error:1198447011448508466> **El usuario no está aislado.**`,
+                  content: `> <:warning:1279144320062066748> **El usuario no está aislado.**`,
                   ephemeral: true,
                 });
 
               if (!miembro.moderatable)
                 return interaction.reply({
-                  content: `> <:error:1198447011448508466> **No puedo remover el aislamiento de este usuario.**`,
+                  content: `> <:warning:1279144320062066748> **No puedo remover el aislamiento de este usuario.**`,
                   ephemeral: true,
                 });
               if (
@@ -908,14 +908,14 @@ module.exports = {
                 miembro.roles.highest.position
               )
                 return interaction.reply({
-                  content: `> <:error:1198447011448508466> **No puedo remover el aislamiento de este usuario, mi rol está por debajo.**`,
+                  content: `> <:warning:1279144320062066748> **No puedo remover el aislamiento de este usuario, mi rol está por debajo.**`,
                   ephemeral: true,
                 });
               if (
                 member?.roles.highest.position <= miembro.roles.highest.position
               )
                 return interaction.reply({
-                  content: `> <:error:1198447011448508466> **No puedes remover el aislamiento de este usuario, tu rol está por debajo.**`,
+                  content: `> <:warning:1279144320062066748> **No puedes remover el aislamiento de este usuario, tu rol está por debajo.**`,
                   ephemeral: true,
                 });
               /* Comprobaciones */
@@ -933,7 +933,7 @@ module.exports = {
                           }),
                         })
                         .setTitle(
-                          `<:newmember:1198448064881512450> Aislamiento removido en __${guild.name}__`
+                          `<:verifiedmember:1279139097000284241> Aislamiento removido en __${guild.name}__`
                         )
                         .addFields({ name: `Moderador`, value: `${member}` })
                         .setFooter({
@@ -946,7 +946,7 @@ module.exports = {
                   })
                   .catch(() => {
                     interaction.channel.send({
-                      content: `> <:error:1198447011448508466> **¡No he podido enviarle el mensaje al usuario!**`,
+                      content: `> <:warning:1279144320062066748> **¡No he podido enviarle el mensaje al usuario!**`,
                     });
                   });
 
@@ -961,7 +961,7 @@ module.exports = {
                         }),
                       })
                       .setTitle(
-                        `<:newmember:1198448064881512450> Aislamiento removido`
+                        `<:verifiedmember:1279139097000284241> Aislamiento removido`
                       )
                       .setThumbnail(
                         usuario.avatarURL({ extension: "png", size: 1024 })
@@ -998,7 +998,7 @@ module.exports = {
               /* Comprobaciones */
               if (!miembro.moderatable)
                 return interaction.reply({
-                  content: `> <:error:1198447011448508466> **No puedo remover la advertencia de este usuario.**`,
+                  content: `> <:warning:1279144320062066748> **No puedo remover la advertencia de este usuario.**`,
                   ephemeral: true,
                 });
               if (
@@ -1006,14 +1006,14 @@ module.exports = {
                 miembro.roles.highest.position
               )
                 return interaction.reply({
-                  content: `> <:error:1198447011448508466> **No puedo remover la advertencia de este usuario, mi rol está por debajo.**`,
+                  content: `> <:warning:1279144320062066748> **No puedo remover la advertencia de este usuario, mi rol está por debajo.**`,
                   ephemeral: true,
                 });
               if (
                 member?.roles.highest.position <= miembro.roles.highest.position
               )
                 return interaction.reply({
-                  content: `> <:error:1198447011448508466> **No puedes remover la advertencia de este usuario, tu rol está por debajo.**`,
+                  content: `> <:warning:1279144320062066748> **No puedes remover la advertencia de este usuario, tu rol está por debajo.**`,
                   ephemeral: true,
                 });
               /* Comprobaciones */
@@ -1024,14 +1024,14 @@ module.exports = {
               });
               if (!data || data.warnings.length === 0) {
                 return interaction.reply({
-                  content: `> <:newmember:1198448064881512450> **Este usuario no tiene ninguna advertencia en el servidor.**`,
+                  content: `> <:verifiedmember:1279139097000284241> **Este usuario no tiene ninguna advertencia en el servidor.**`,
                   ephemeral: true,
                 });
               }
 
               if (isNaN(id) || id < 0 || data.warnings[id] === undefined) {
                 return interaction.reply({
-                  content: `> <:error:1198447011448508466> **La Id no es válida.**`,
+                  content: `> <:warning:1279144320062066748> **La Id no es válida.**`,
                   ephemeral: true,
                 });
               }
@@ -1056,7 +1056,7 @@ module.exports = {
                         }),
                       })
                       .setTitle(
-                        `<:newmember:1198448064881512450> Advertencia removida en __${guild.name}__`
+                        `<:verifiedmember:1279139097000284241> Advertencia removida en __${guild.name}__`
                       )
                       .addFields(
                         { name: `Moderador`, value: `${member}` },
@@ -1072,7 +1072,7 @@ module.exports = {
                 })
                 .catch(() => {
                   interaction.channel.send({
-                    content: `> <:error:1198447011448508466> **¡No he podido enviarle el mensaje al usuario!**`,
+                    content: `> <:warning:1279144320062066748> **¡No he podido enviarle el mensaje al usuario!**`,
                   });
                 });
 
@@ -1087,7 +1087,7 @@ module.exports = {
                       }),
                     })
                     .setTitle(
-                      `<:newmember:1198448064881512450> Advertencia removida`
+                      `<:verifiedmember:1279139097000284241> Advertencia removida`
                     )
                     .setThumbnail(
                       usuario.avatarURL({ extension: "png", size: 1024 })
@@ -1126,7 +1126,7 @@ module.exports = {
               /* Comprobaciones */
               if (!miembro.moderatable)
                 return interaction.reply({
-                  content: `> <:error:1198447011448508466> **No puedo sancionar a este usuario.**`,
+                  content: `> <:warning:1279144320062066748> **No puedo sancionar a este usuario.**`,
                   ephemeral: true,
                 });
               if (
@@ -1134,14 +1134,14 @@ module.exports = {
                 miembro.roles.highest.position
               )
                 return interaction.reply({
-                  content: `> <:error:1198447011448508466> **No puedo sancionar a este usuario, mi rol está por debajo.**`,
+                  content: `> <:warning:1279144320062066748> **No puedo sancionar a este usuario, mi rol está por debajo.**`,
                   ephemeral: true,
                 });
               if (
                 member?.roles.highest.position <= miembro.roles.highest.position
               )
                 return interaction.reply({
-                  content: `> <:error:1198447011448508466> **No puedes sancionar a este usuario, tu rol está por debajo.**`,
+                  content: `> <:warning:1279144320062066748> **No puedes sancionar a este usuario, tu rol está por debajo.**`,
                   ephemeral: true,
                 });
               /* Comprobaciones */
@@ -1182,7 +1182,7 @@ module.exports = {
                         }),
                       })
                       .setTitle(
-                        `<:error:1198447011448508466> Has sido advertido en __${guild.name}__`
+                        `<:warning:1279144320062066748> Has sido advertido en __${guild.name}__`
                       )
                       .addFields(
                         {
@@ -1204,7 +1204,7 @@ module.exports = {
                 })
                 .catch(() => {
                   interaction.channel.send({
-                    content: `> <:error:1198447011448508466> **¡No he podido enviarle el mensaje al usuario!**`,
+                    content: `> <:warning:1279144320062066748> **¡No he podido enviarle el mensaje al usuario!**`,
                   });
                 });
 
@@ -1218,7 +1218,7 @@ module.exports = {
                         size: 1024,
                       }),
                     })
-                    .setTitle(`<:shield:1198447657761390622> Usuario advertido`)
+                    .setTitle(`<:shield:1279141839605334168> Usuario advertido`)
                     .setThumbnail(
                       usuario.avatarURL({ extension: "png", size: 1024 })
                     )
@@ -1243,7 +1243,7 @@ module.exports = {
             } catch (e) {
               console.log(e);
               return interaction.reply({
-                content: `> <:error:1198447011448508466> **¡No he podido advertir al usuario!**`,
+                content: `> <:warning:1279144320062066748> **¡No he podido advertir al usuario!**`,
                 ephemeral: true,
               });
             }
@@ -1252,7 +1252,7 @@ module.exports = {
       }
     } catch (e) {
       await interaction.reply({
-        content: `> <:warning:1198447554497618010>** ¡Ocurrió un error al intentar ejecutar el comando!**`,
+        content: `> <:error:1279142677308248238> **¡Ocurrió un error al intentar ejecutar el comando!**`,
         ephemeral: true,
       });
       console.log(e);

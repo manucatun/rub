@@ -18,25 +18,25 @@ module.exports = {
       const archivo = interaction.options.getAttachment("archivo");
       if (!archivo.contentType.startsWith("image/"))
         return interaction.editReply({
-          content: `> <:error:1198447011448508466> **No es un formato de archivo válido.**`,
+          content: `> <:warning:1279144320062066748> **No es un formato de archivo válido.**`,
           ephemeral: true,
         });
 
       await client.user.setAvatar(archivo.url).catch(async (e) => {
         console.log(e);
         return await interaction.editReply({
-          content: `> <:error:1198447011448508466> **¡Ocurrió un error al intentar ejecutar el comando!**`,
+          content: `> <:error:1279142677308248238> **¡Ocurrió un error al intentar ejecutar el comando!**`,
           ephemeral: true,
         });
       });
 
       await interaction.editReply({
-        content: `> <:management:1198448111547318282> **¡Avatar modificado correctamente!**`,
+        content: `> <:management:1279139587448504460> **¡Avatar modificado correctamente!**`,
       });
     } catch (e) {
       console.log(e);
       interaction.reply({
-        content: `> <:warning:1198447554497618010> **¡Ocurrió un error al intentar ejecutar el comando!**`,
+        content: `> <:error:1279142677308248238> **¡Ocurrió un error al intentar ejecutar el comando!**`,
         ephemeral: true,
       });
     }

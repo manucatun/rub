@@ -34,7 +34,7 @@ module.exports = {
             /* Comprobaciones */
             if (!guild.bannerURL()) {
               return interaction.reply({
-                content: `> <:error:1198447011448508466> **Este servidor no tiene un banner.**`,
+                content: `> <:warning:1279144320062066748> **Este servidor no tiene un banner.**`,
                 ephemeral: true,
               });
             }
@@ -81,7 +81,7 @@ module.exports = {
             /* Comprobaciones */
             if (!guild.iconURL()) {
               return interaction.reply({
-                content: `> <:error:1198447011448508466> **Este servidor no tiene un icono.**`,
+                content: `> <:warning:1279144320062066748> **Este servidor no tiene un icono.**`,
                 ephemeral: true,
               });
             }
@@ -158,7 +158,7 @@ module.exports = {
                       name: `Información General`,
                       value: [
                         `📋 • **ID:** \`${guild.id}\``,
-                        `<:owner:1198448330641002548> • **Dueño:** ${await guild.fetchOwner()}`,
+                        `<:owner:1279140156565225627> • **Dueño:** ${await guild.fetchOwner()}`,
                         `🌍 • **Nombre:** ${guild.name}`,
                         `📅 • **Creación:** <t:${parseInt(
                           guild.createdTimestamp / 1000
@@ -168,7 +168,7 @@ module.exports = {
                     {
                       name: `Usuarios`,
                       value: [
-                        `<:members:1198448160847188050> • **Miembros:** ${
+                        `<:members:1279140407720022148> • **Miembros:** ${
                           guild.members.cache.filter(
                             (miembro) => !miembro.user.bot
                           ).size
@@ -205,7 +205,7 @@ module.exports = {
                       value: [
                         `🎨 • **Roles:** ${guild.roles.cache.size}`,
                         `😃 • **Emojis:** ${guild.emojis.cache.size}`,
-                        `<:boost:1198448219957502093> • **Nivel de Mejoras:** ${guild.premiumTier}`,
+                        `<:booster:1279140811480760410> • **Nivel de Mejoras:** ${guild.premiumTier}`,
                         `🎁 • **Boosts:** ${guild.premiumSubscriptionCount.toString()}`,
                       ].join("\n"),
                     },
@@ -225,7 +225,7 @@ module.exports = {
     } catch (e) {
       console.log(e);
       interaction.reply({
-        content: `> <:warning:1198447554497618010> **¡Ocurrió un error al intentar ejecutar el comando!**`,
+        content: `> <:error:1279142677308248238> **¡Ocurrió un error al intentar ejecutar el comando!**`,
         ephemeral: true,
       });
     }

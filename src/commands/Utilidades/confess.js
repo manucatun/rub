@@ -28,14 +28,14 @@ module.exports = {
       !guild.channels.cache.get(data.confessions)
     )
       return interaction.reply({
-        content: `> <:management:1198448111547318282> **No se ha establecido un canal para enviar confesiones en el servidor.**`,
+        content: `> <:management:1279139587448504460> **No se ha establecido un canal para enviar confesiones en el servidor.**`,
         ephemeral: true,
       });
 
     const canal = guild.channels.cache.get(data.confessions);
     if (!canal)
       return interaction.reply({
-        content: `> <:management:1198448111547318282> **No se ha establecido un canal para enviar confesiones en el servidor.**`,
+        content: `> <:management:1279139587448504460> **No se ha establecido un canal para enviar confesiones en el servidor.**`,
         ephemeral: true,
       });
     /* Comprobaciones */
@@ -124,13 +124,13 @@ module.exports = {
         });
       } else {
         return modalInteraction.editReply({
-          content: `> <:error:1198447011448508466> **No es un valor válido para definir una confesión anónima.**`,
+          content: `> <:warning:1279144320062066748> **No es un valor válido para definir una confesión anónima.**`,
           ephemeral: true,
         });
       }
 
       modalInteraction.editReply({
-        content: `> <:new:1198448546207248606> **¡Tu confesión se creó correctamente!**`,
+        content: `> <:newmember:1279138879349456916> **¡Tu confesión se creó correctamente!**`,
       });
     } catch (e) {
       if (e.code === "InteractionCollectorError") {
@@ -140,7 +140,7 @@ module.exports = {
       } else {
         console.log(e);
         modalInteraction.editReply({
-          content: `> <:warning:1198447554497618010> **¡Ocurrió un error al intentar ejecutar el comando!**`,
+          content: `> <:error:1279142677308248238> **¡Ocurrió un error al intentar ejecutar el comando!**`,
           ephemeral: true,
         });
       }

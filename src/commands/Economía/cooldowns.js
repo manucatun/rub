@@ -28,7 +28,7 @@ module.exports = {
       });
       if (!data) {
         return await interaction.reply({
-          content: `> <:no:1198446838819328050> **No tienes una cuenta de economía existente.**`,
+          content: `> <:cross:1279140540901888060> **No tienes una cuenta de economía existente.**`,
           ephemeral: true,
         });
       }
@@ -92,19 +92,19 @@ module.exports = {
             .addFields(
               {
                 name: `🚜 Work`,
-                value: `<:time:1198844708655485048> ${timeWork}\n`,
+                value: `<:time:1279138439417303161> ${timeWork}\n`,
               },
               {
                 name: `📅 Daily`,
-                value: `<:time:1198844708655485048> ${timeDaily}\n`,
+                value: `<:time:1279138439417303161> ${timeDaily}\n`,
               },
               {
                 name: `🔫 Crime`,
-                value: `<:time:1198844708655485048> ${timeCrime}\n`,
+                value: `<:time:1279138439417303161> ${timeCrime}\n`,
               },
               {
                 name: `😈 Rob`,
-                value: `<:time:1198844708655485048> ${timeRob}\n`,
+                value: `<:time:1279138439417303161> ${timeRob}\n`,
               }
             )
             /* .setColor(process.env.COLOR) */
@@ -117,7 +117,7 @@ module.exports = {
     } catch (e) {
       console.log(e);
       interaction.reply({
-        content: `> <:error:1198447011448508466> **¡Ocurrió un error al intentar ejecutar el comando!**`,
+        content: `> <:error:1279142677308248238> **¡Ocurrió un error al intentar ejecutar el comando!**`,
         ephemeral: true,
       });
     }

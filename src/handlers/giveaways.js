@@ -72,7 +72,7 @@ module.exports = async (client) => {
         botsCanWin: false,
         embedColor: process.env.COLOR,
         embedColorEnd: "Green",
-        reaction: "1198447473346236506",
+        reaction: "1279143324934209587",
       },
     });
     /* Crear Sistema */

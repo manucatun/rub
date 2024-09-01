@@ -72,12 +72,12 @@ async function asegurarTodo(guildid, userid) {
 
 /* Format Results */
 const pb = {
-  le: "<:izqV:1203897842712977518>",
-  me: "<:medV:1203897931359322122>",
-  re: "<:derV:1203897987453952020>",
-  lf: "<:izdR:1203898046803484752>",
-  mf: "<:medR:1203898128298811402>",
-  rf: "<:derR:1203898184196169788>",
+  le: "<:leftempty:1279147234536980490>",
+  me: "<:middleempty:1279147416368582718>",
+  re: "<:rightempty:1279147493170614466>",
+  lf: "<:leftfull:1279146872623333446>",
+  mf: "<:middlefull:1279147001531076710>",
+  rf: "<:rightfull:1279147110520062065>",
 };
 
 function formatoResultados(upVotes = [], downVotes = []) {
@@ -102,11 +102,11 @@ function formatoResultados(upVotes = [], downVotes = []) {
   const resultados = [];
 
   resultados.push(
-    `<:yes:1198446878258385026> \`${
+    `<:check:1279140507867418859> \`${
       upVotes.length
     } votos positivos (${porcentajeSi.toFixed(
       1
-    )}%)\` • <:no:1198446838819328050> \`${
+    )}%)\` • <:cross:1279140540901888060> \`${
       downVotes.length
     } votos negativos (${porcentajeNo.toFixed(1)}%)\``
   );
@@ -150,7 +150,7 @@ async function paginacion(
   const bAtras = new ButtonBuilder()
     .setStyle("Primary")
     .setCustomId("atras")
-    .setEmoji("993720768598904974")
+    .setEmoji("1279929193177546822")
     .setLabel("Anterior");
   const bInicio = new ButtonBuilder()
     .setStyle("Success")
@@ -160,11 +160,11 @@ async function paginacion(
   const bAdelante = new ButtonBuilder()
     .setStyle("Primary")
     .setCustomId("adelante")
-    .setEmoji("993720745848999936")
+    .setEmoji("1279929402230177806")
     .setLabel("Siguiente");
 
   let embedPag = await interaction.reply({
-    content: `> <:management:1198448111547318282> **Utiliza los botones para cambiar de página.**`,
+    content: `> <:management:1279139587448504460> **Utiliza los botones para cambiar de página.**`,
     embeds: [
       embeds[0].setFooter({
         text: `Página ${pagActual + 1} / ${embeds.length}`,
@@ -189,7 +189,7 @@ async function paginacion(
   collector.on("collect", async (button) => {
     if (button?.user.id !== interaction.user.id) {
       return button?.reply({
-        content: `> <:error:1198447011448508466> **Solo la persona que ejecutó el comando puede utilizar los botones.**`,
+        content: `> <:warning:1279144320062066748> **Solo la persona que ejecutó el comando puede utilizar los botones.**`,
         ephemeral: true,
       });
     }
@@ -294,7 +294,7 @@ async function paginacion(
   collector.on("end", async () => {
     await embedPag
       .edit({
-        content: `> <:time:1198844708655485048> El temporizador de la interacción ha expirado.`,
+        content: `> <:time:1279138439417303161> El temporizador de la interacción ha expirado.`,
         components: [],
       })
       .catch(() => {});

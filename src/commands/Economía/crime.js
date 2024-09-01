@@ -34,7 +34,7 @@ module.exports = {
         );
 
         return await interaction.reply({
-          content: `> <:time:1198844708655485048> **Podrás volver a intentar realizar un crimen <t:${tiempoRes}:R>.**`,
+          content: `> <:time:1279138439417303161> **Podrás volver a intentar realizar un crimen <t:${tiempoRes}:R>.**`,
           ephemeral: true,
         });
       }
@@ -59,7 +59,7 @@ module.exports = {
                 iconURL: user.avatarURL({ extension: "png", size: 1024 }),
               })
               .setDescription(
-                `💸 ¡El crimen ha sido un éxito, obtuviste una recompensa de <:coinIcon:1240873651956482139> **${recompensa.toLocaleString()} monedas**!\n`
+                `💸 ¡El crimen ha sido un éxito, obtuviste una recompensa de <:coin:1279135394918694922> **${recompensa.toLocaleString()} monedas**!\n`
               )
               .addFields({
                 name: `Crimen Realizado`,
@@ -91,7 +91,7 @@ module.exports = {
                 iconURL: user.avatarURL({ extension: "png", size: 1024 }),
               })
               .setDescription(
-                `🚔 ¡El crimen ha fracasado completamente, perdiste <:coinIcon:1240873651956482139> **${recompensa.toLocaleString()} monedas**!\n`
+                `🚔 ¡El crimen ha fracasado completamente, perdiste <:coin:1279135394918694922> **${recompensa.toLocaleString()} monedas**!\n`
               )
               .addFields({
                 name: `Crimen Realizado`,
@@ -108,7 +108,7 @@ module.exports = {
     } catch (e) {
       console.log(e);
       interaction.reply({
-        content: `> <:error:1198447011448508466> **¡Ocurrió un error al intentar ejecutar el comando!**`,
+        content: `> <:error:1279142677308248238> **¡Ocurrió un error al intentar ejecutar el comando!**`,
         ephemeral: true,
       });
     }
