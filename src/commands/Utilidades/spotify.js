@@ -26,7 +26,7 @@ module.exports = {
       sub
         .setName("album")
         .setDescription(
-          "Observa la información sobre el álbum de la canción que está sonando"
+          "Observa la información sobre el álbum o EP de la canción que está sonando"
         )
         .addUserOption((option) =>
           option
@@ -38,7 +38,7 @@ module.exports = {
       sub
         .setName("artist")
         .setDescription(
-          "Observa la información sobre el autor de la canción que está sonando"
+          "Observa la información sobre el artista de la canción que está sonando"
         )
         .addUserOption((option) =>
           option
