@@ -6,7 +6,7 @@ const {
 const canvafy = require("canvafy");
 const moment = require("moment");
 const { getAverageColor } = require("fast-average-color-node");
-const spotifyApi = require("../../events/client/ready");
+const { spotifyApi } = require("../../events/client/ready");
 module.exports = {
   CMD: new SlashCommandBuilder()
     .setDescription("🎶 Muestra la actividad en Spotify de un usuario")
