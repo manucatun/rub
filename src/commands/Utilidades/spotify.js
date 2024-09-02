@@ -183,7 +183,7 @@ module.exports = {
               data.body.total_tracks === 1
             ) {
               return interaction.editReply({
-                content: `> <:cross:1279140540901888060> **La canción actual no pertenece a un álbum, utiliza el comando </test track:1270951702912172142> para ver la información del sencillo.**`,
+                content: `> <:cross:1279140540901888060> **La canción actual no pertenece a un álbum, utiliza el comando </spotify track:1171933755917738065> para ver la información del sencillo.**`,
               });
             }
 
@@ -298,7 +298,7 @@ module.exports = {
               .map((track, index) => {
                 return `\`${index + 1}\` [${track.name}](${
                   track.external_urls.spotify
-                })`;
+              }) • (${track.popularity}%)`;
               })
               .filter((track) => track.trim() != "")
               .join("\n");
