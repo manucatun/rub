@@ -9,7 +9,6 @@ const SpotifyWebAPI = require("spotify-web-api-node");
 const spotifyApi = new SpotifyWebAPI({
   clientId: "c7cab45bd5e144a9b343a39fe93983fd",
   clientSecret: "a7d5fcbafeda4f6fbd3a2f6e790527dc",
-  redirectUri: "https://dsc.gg/rub-",
 });
 
 module.exports = (client) => {
@@ -41,18 +40,24 @@ module.exports = (client) => {
   }
 
   /* Conectar API de Spotify */
-  spotifyApi.clientCredentialsGrant().then(
-    function (data) {
-      console.log(
-        `〔🎶〕Conectado a la API de Spotify: ${data.body["access_token"]}`
-          .brightMagenta.bold
-      );
-      spotifyApi.setAccessToken(data.body["access_token"]);
-    },
-    function (err) {
-      console.log(`〔🔗〕Error al conectar a la API de Spotify!`.bgRed);
-    }
-  );
+  function conectarSpotifyApi() {
+    spotifyApi.clientCredentialsGrant().then(
+      function (data) {
+        console.log(
+          `〔🎶〕Conectado a la API de Spotify: ${data.body["access_token"]}`
+            .brightMagenta.bold
+        );
+        spotifyApi.setAccessToken(data.body["access_token"]);
+
+        setTimeout(conectarSpotifyApi, (data.body["expires_in"] - 300) * 1000);
+      },
+      function (err) {
+        console.log(`〔🔗〕Error al conectar a la API de Spotify!`.bgRed);
+      }
+    );
+  }
+
+  conectarSpotifyApi();
   /* Conectar API de Spotify */
 
   webhook.send({
