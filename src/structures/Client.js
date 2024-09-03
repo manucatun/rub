@@ -3,6 +3,7 @@ const {
   GatewayIntentBits,
   Partials,
   ActivityType,
+  SlashCommandBuilder,
   PresenceUpdateStatus,
   Collection,
 } = require("discord.js");
@@ -78,7 +79,9 @@ module.exports = class extends Client {
         try {
           require(rutaArchivo)(this);
         } catch (e) {
-          console.log(`〔💥〕ERROR AL CARGAR EL ARCHIVO >〔 ${rutaArchivo} 〕`.bgRed);
+          console.log(
+            `〔💥〕ERROR AL CARGAR EL ARCHIVO >〔 ${rutaArchivo} 〕`.bgRed
+          );
           console.log(e);
         }
       });
@@ -106,7 +109,9 @@ module.exports = class extends Client {
             .split(".")[0];
           this.on(nombreEvento, evento.bind(null, this));
         } catch (e) {
-          console.log(`〔💥〕ERROR AL CARGAR EL ARCHIVO >〔 ${rutaArchivo} 〕`.bgRed);
+          console.log(
+            `〔💥〕ERROR AL CARGAR EL ARCHIVO >〔 ${rutaArchivo} 〕`.bgRed
+          );
           console.log(e);
         }
       });
@@ -138,7 +143,9 @@ module.exports = class extends Client {
           if (nombreComando) this.slashCommands.set(nombreComando, comando);
           this.slashArray.push(comando.CMD.toJSON());
         } catch (e) {
-          console.log(`〔💥〕ERROR AL CARGAR EL ARCHIVO >〔 ${rutaArchivo} 〕`.bgRed);
+          console.log(
+            `〔💥〕ERROR AL CARGAR EL ARCHIVO >〔 ${rutaArchivo} 〕`.bgRed
+          );
           console.log(e);
         }
       });
