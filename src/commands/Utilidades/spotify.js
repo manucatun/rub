@@ -96,8 +96,12 @@ module.exports = {
               track.album.album_type === "album" || track.album.total_tracks > 2
                 ? `[${track.album.name}](${track.album.external_urls.spotify})`
                 : "Sencillo";
-            const minutos = Math.floor(track.duration_ms / 60000);
-            const segundos = Math.floor((track.duration_ms % 60000) / 1000);
+            const minutos = Math.floor(track.duration_ms / 60000)
+              .toString()
+              .padStart(2, "0");
+            const segundos = Math.floor((track.duration_ms % 60000) / 1000)
+              .toString()
+              .padStart(2, "0");
             const now = moment();
             const startTime = moment(actividad.timestamps.start);
             const playbackTime = now.diff(startTime);
@@ -298,7 +302,7 @@ module.exports = {
               .map((track, index) => {
                 return `\`${index + 1}\` [${track.name}](${
                   track.external_urls.spotify
-              }) • (${track.popularity}%)`;
+                }) • (${track.popularity}%)`;
               })
               .filter((track) => track.trim() != "")
               .join("\n");
